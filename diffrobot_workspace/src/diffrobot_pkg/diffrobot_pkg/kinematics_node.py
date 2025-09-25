@@ -7,13 +7,16 @@
 import rclpy
 import rclpy.Node
 
-class Kinematics_Node(Node ):
+class Kinematics_Node(Node):
     # Subscrigbes to 
     # Calculates pose
     # Publishes to 
     # Service
-def main(ARGS=None): #THIS INPUT CFHANGES EVERYSINGLE EFFING TIME WHAT THE HECK IS IT SUPPOSED TO DAMN BE BRO???????
+    def __init__(self):
+    lkjnlkjlk
 
+def main(ARGS=None): #THIS INPUT CFHANGES EVERYSINGLE EFFING TIME WHAT THE HECK IS IT SUPPOSED TO DAMN BE BRO???????
+    RDFDF
 
 if __name__ == '__main__':
     main()
