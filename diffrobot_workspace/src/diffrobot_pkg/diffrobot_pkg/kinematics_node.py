@@ -4,14 +4,15 @@
 # - Subscribes to /wheel_ticks and computes pose (x, y, theta) using differential-drive kinematics.
 # - Publishes custom messages Pose2DStamped.msg on /pose.
 # - Offers service /reset_pose (type SetPose.srv) to set the internal pose to given (x, y, theta).
-import rclpy
-import rclpy.Node
-# Import custom msg and srv structures
+
+#import rclpy
+#import rclpy.Node as Node
+#Import custom msg and srv structures
 
 class Kinematics_Node(Node):
-    # Subscribes to 
+    # Subscribes to
     # Calculates pose
-    # Publishes to 
+    # Publishes to
     # Service
     def __init__(self):
         lkjnlkjlk
