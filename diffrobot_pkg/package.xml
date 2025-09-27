@@ -4,7 +4,7 @@
   <name>diffrobot_pkg</name>
   <version>0.0.0</version>
   <description>TODO: Package description</description>
-  <maintainer email="ros2@todo.todo">ros2</maintainer>
+  <maintainer email="nectargonzalez@outlook.com">Nectar A. Gonzalez Negron</maintainer>
   <license>Apache-2.0</license>
 
   <test_depend>ament_copyright</test_depend>
