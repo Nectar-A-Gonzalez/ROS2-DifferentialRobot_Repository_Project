@@ -40,18 +40,18 @@ t = 1 #time the velocity is applied for #(seconds)#CHANGEABLE
 #### do i need to include these variables as input for them to be used?????
 
 class EncoderNode(Node): 
-    
     def __init__(self):
         super.__init__("encoder_node") #name attribute
         # SUBSCRIBER TO /cmd_vel TOPIC - (Gets Vx and Wz)
         self.subscription = self.create_subscription(Twist, 'cmd_vel', self.sub_cmdvel_callback, 25) #msg class type,topic name, callback, reserve amount)
+        self.subscription # recommended to prevent unused variable warning
 
-        # PUBLISHER TO /wheel_ticks TOPIC AT 20Hz (~20 )
+        # PUBLISHER TO /wheel_ticks TOPIC AT 20Hz (~20 times per second)
         self.publisher_ = self.create_publisher(WheelTicks, 'wheel_ticks', 25) # msg class,topic name (topic seems to be created here), allowable data reserve #FIX Research later
         timer_period = 0.05 #seconds #time interval it will publish/run the callback at #Publish 20Hz -> publish each 0.05 seconds
         self.pub_timer = self.create_timer(timer_period, self.pub_wheelticks_callback)
 
-    def sub_cmdvel_callback(self,msg):
+    def sub_cmdvel_callback(self,msg): #Runs everytime it recieves a msg through /cmd_vel topic
         self.get_logger().info('The robot currently travels: ')
 
     def pub_wheelticks_callback(self): 
@@ -76,8 +76,6 @@ class EncoderNode(Node):
         # Calculate the ticks the encoder has/should count - CUMULATIVE AMOUNTS
         right_ticks = sed #TODO Change to msg object variables
         left_ticks = sd #TODO Change to msg object variables
-
-    # PUBLISHER TO /wheel_ticks TOPIC AT 20Hz
 
 # only calculate when callback called, but how do i make it cummulative?
 
