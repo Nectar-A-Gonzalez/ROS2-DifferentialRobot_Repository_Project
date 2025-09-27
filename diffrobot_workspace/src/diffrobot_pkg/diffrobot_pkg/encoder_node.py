@@ -38,6 +38,7 @@ ticks_per_degree = encoder_tick_amount/360
 t = 1 #time the velocity is applied for #(seconds)#CHANGEABLE
 
 #### do i need to include these variables as input for them to be used?????
+# TESTING COMMIT TO REMOTES @@@@@@@@@
 
 class EncoderNode(Node): 
     def __init__(self):
