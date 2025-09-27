@@ -5,7 +5,6 @@ The behavior is as follows:
 The robot is given a velocity at which it should move, the encoders are to 
 
 
-
 ## How to build the package in your own workspace:
 To build the package in the works space, first create your dfdf dfd<br>
 
@@ -14,8 +13,9 @@ To build the package in the works space, first create your dfdf dfd<br>
 
 ## Commands to test the pub/sub and service/client communications:
 sdsdsdsd<br>
+To simulate a commanding velocity input, dfdf<br>
 
-    dsf
+    ros2 pub dfdfdf at -rate 10
     dfd
 
 dfdfdf<br>
