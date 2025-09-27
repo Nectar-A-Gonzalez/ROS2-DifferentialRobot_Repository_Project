@@ -50,16 +50,22 @@ class EncoderNode(Node):
         self.publisher_ = self.create_publisher(WheelTicks, 'wheel_ticks', 25) # msg class,topic name (topic seems to be created here), allowable data reserve #FIX Research later
         timer_period = 0.05 #seconds #time interval it will publish/run the callback at #Publish 20Hz -> publish each 0.05 seconds
         self.pub_timer = self.create_timer(timer_period, self.pub_wheelticks_callback)
+        self.i = 0
 
-    def sub_cmdvel_callback(self,msg): #Runs everytime it recieves a msg through /cmd_vel topic
-        self.get_logger().info('The robot currently travels: ')
+    def sub_cmdvel_callback(self,msg:): #Runs everytime it recieves a msg through /cmd_vel topic #FLAG
+        self.get_logger().info(f'The robot currently travels:{msg.data}.') #FLAG
 
-    def pub_wheelticks_callback(self): 
+
+    def pub_wheelticks_callback(self, msg: ): 
         # Run this function every 0.05 seconds #Calculated from Twist msg recieved (aka Vx and Wz) to obtain wheel tick amount:
+        msg = 
+
+        #TODO - Figure out how the data should be shared between them I am confusion
+
         # Take Vx as robot's linear velocity and Wz as robots angular velocity (Change with topic publish, this goes in a callback)
         # Calculate individual linear wheel velocities (from cmd_vel Vx and Wz given values)
         V_right_wheel = V_robot + w_robot * wheel_axel_width/2 #TODO Change V_robot and w_robot to the correct connected variables to the msg object 
-        V_left_wheel = V_robot - w_robot * wheel_axel_width/2
+        V_left_wheel = V_robot - w_robot * wheel_axel_width/2 
 
         # Convert to angular velocities (per wheel)
         w_right = V_right_wheel/wheel_radius
