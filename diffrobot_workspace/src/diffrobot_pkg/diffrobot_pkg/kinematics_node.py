@@ -9,6 +9,10 @@
 #import rclpy.Node as Node
 #Import custom msg and srv structures
 
+# SIMUL Input
+
+# wheelticks
+
 class Kinematics_Node(Node):
     # Subscribes to
     # Calculates pose
