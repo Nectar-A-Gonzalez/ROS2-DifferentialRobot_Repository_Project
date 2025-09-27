@@ -5,26 +5,35 @@
 # - Publishes custom messages Pose2DStamped.msg on /pose.
 # - Offers service /reset_pose (type SetPose.srv) to set the internal pose to given (x, y, theta).
 
-#import rclpy
-#import rclpy.Node as Node
-#Import custom msg and srv structures
+import rclpy
+import rclpy.Node as Node
+from 
 
 # SIMUL Input
 
-# wheelticks
+# Wheelticks.msg
+# builtin_interfaces/Time stamp
+# int32 left_ticks
+# int32 right_ticks
 
-class Kinematics_Node(Node):
-    # Subscribes to
-    # Calculates pose
-    # Publishes to
-    # Service
+# Pose2DStamped.msg
+# builtin_interfaces/Time stamp
+# float32 x
+# float32 y
+# float32 theta
+
+
+class KinematicsNode(Node):
     def __init__(self):
-        lkjnlkjlk
-
+        super.__init__()
+        # SUBSCRIBER TO /wheel_ticks (left tick amount, right tick amount; cummulative)
+        # PUBLISHER TO /pose (after calculating 2D pose from wheel ticks)
+        # SERVER TO /reset_pose (set pose as a desired on, #assume clear wheel tick amounts)
 
 
 def main(ARGS=None): #THIS INPUT CFHANGES EVERYSINGLE EFFING TIME WHAT THE HECK IS IT SUPPOSED TO DAMN BE BRO???????
-    RDFDF
+    rclpy.init(args=args)
+    
 
 if __name__ == '__main__':
     main()

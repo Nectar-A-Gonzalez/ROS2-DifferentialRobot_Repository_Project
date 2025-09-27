@@ -33,12 +33,11 @@ from diffrobot_interfaces.msg import WheelTicks #custom pkg
 # Variables for configuration:
 wheel_radius = we #(meters)#CHANGEABLE
 wheel_axel_width = we #(meters)CHANGEABLE
-encoder_tick_amount = ewe #CHANGEABLE  #TODO CHANGE TO ACTUAL TERMINOLOGY BROSKI
+encoder_tick_amount = ewe #CHANGEABLE  #TODO - CHANGE TO ACTUAL TERMINOLOGY BROSKI
 ticks_per_degree = encoder_tick_amount/360
 t = 1 #time the velocity is applied for #(seconds)#CHANGEABLE
 
-#### do i need to include these variables as input for them to be used?????
-# TESTING COMMIT TO REMOTES @@@@@@@@@
+#### do i need to include these variables as input for them to be used????? #TODO - Verify this 
 
 class EncoderNode(Node): 
     def __init__(self):
@@ -78,7 +77,7 @@ class EncoderNode(Node):
         right_ticks = sed #TODO Change to msg object variables
         left_ticks = sd #TODO Change to msg object variables
 
-# only calculate when callback called, but how do i make it cummulative?
+# only calculate when callback called, but how do i make it cummulative? 
 
 
 # one call back per channel connection
