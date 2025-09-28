@@ -5,7 +5,7 @@
 # - Interprets /cmd_vel (geometry_msgs/Twist) to update wheel tick increments. (aka a SUBSCIRBER)
 #   (You may generate your own /cmd_vel for testing; teleop is optional and not graded).
 
-import rclpy
+import rclpy #I assume rclpy is part of base ROS2 installation and that is why it is accesable and do not have to do pip
 from rclpy.node import Node
 import numpy as np
 from geometry_msgs.msg import Twist #base ros2 installation
@@ -31,9 +31,9 @@ from diffrobot_interfaces.msg import WheelTicks #custom pkg
 # int32 right_ticks
 
 # Variables for configuration:
-wheel_radius = we #(meters)#CHANGEABLE
-wheel_axel_width = we #(meters)CHANGEABLE
-encoder_tick_amount = ewe #CHANGEABLE  #TODO - CHANGE TO ACTUAL TERMINOLOGY BROSKI
+wheel_radius = DFDF#(meters)#CHANGEABLE
+wheel_axel_width = DFDF#(meters)CHANGEABLE
+encoder_tick_amount = DFDF#CHANGEABLE  #TODO - CHANGE TO ACTUAL TERMINOLOGY BROSKI
 ticks_per_degree = encoder_tick_amount/360
 t = 1 #time the velocity is applied for #(seconds)#CHANGEABLE
 
@@ -52,13 +52,14 @@ class EncoderNode(Node):
         self.pub_timer = self.create_timer(timer_period, self.pub_wheelticks_callback)
         self.i = 0
 
-    def sub_cmdvel_callback(self,msg:): #Runs everytime it recieves a msg through /cmd_vel topic #FLAG
+    def sub_cmdvel_callback(self,msg:DFDF): #Runs everytime it recieves a msg through /cmd_vel topic #FLAG
         self.get_logger().info(f'The robot currently travels:{msg.data}.') #FLAG
+        dfdf
 
 
-    def pub_wheelticks_callback(self, msg: ): 
+    def pub_wheelticks_callback(self, msg:): 
         # Run this function every 0.05 seconds #Calculated from Twist msg recieved (aka Vx and Wz) to obtain wheel tick amount:
-        msg = 
+        msg = DFDF
 
         #TODO - Figure out how the data should be shared between them I am confusion
 
@@ -80,8 +81,8 @@ class EncoderNode(Node):
         degrees_left = w_left_deg/t
 
         # Calculate the ticks the encoder has/should count - CUMULATIVE AMOUNTS
-        right_ticks = sed #TODO Change to msg object variables
-        left_ticks = sd #TODO Change to msg object variables
+        right_ticks = DFDF#TODO Change to msg object variables
+        left_ticks = DFDF#TODO Change to msg object variables
 
 # only calculate when callback called, but how do i make it cummulative? 
 
