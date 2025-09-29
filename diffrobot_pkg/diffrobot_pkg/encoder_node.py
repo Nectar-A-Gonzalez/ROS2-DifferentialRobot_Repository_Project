@@ -30,12 +30,13 @@ from diffrobot_interfaces.msg import WheelTicks #custom pkg
 # int32 left_ticks
 # int32 right_ticks
 
-# Variables for configuration:
-wheel_radius = DFDF#(meters)#CHANGEABLE
-wheel_axel_width = DFDF#(meters)CHANGEABLE
-encoder_tick_amount = DFDF#CHANGEABLE  #TODO - CHANGE TO ACTUAL TERMINOLOGY BROSKI
+# Variables for configuration (CHANGEABLE):
+# These do not varie from velocity command to velocity command
+wheel_radius = DFDF #(meters)
+wheel_axel_width = DFDF #(meters)
+encoder_tick_amount = DFDF #TODO-CHANGE TO ACTUAL TERMINOLOGY BROSKI
 ticks_per_degree = encoder_tick_amount/360
-t = 1 #time the velocity is applied for #(seconds)#CHANGEABLE
+t = 1 #(seconds) #time the velocity is applied for
 
 #### do i need to include these variables as input for them to be used????? #TODO - Verify this 
 
@@ -52,17 +53,20 @@ class EncoderNode(Node):
         self.pub_timer = self.create_timer(timer_period, self.pub_wheelticks_callback)
         self.i = 0
 
-    def sub_cmdvel_callback(self,msg:DFDF): #Runs everytime it recieves a msg through /cmd_vel topic #FLAG
+    
+    def sub_cmdvel_callback(self,msg:DFDF):
+        # Runs everytime it recieves a msg through /cmd_vel topic #FLAG
         self.get_logger().info(f'The robot currently travels:{msg.data}.') #FLAG
         dfdf
 
-
-    def pub_wheelticks_callback(self, msg:): 
+    
+    def pub_wheelticks_callback(self, msg:DFDF):
         # Run this function every 0.05 seconds #Calculated from Twist msg recieved (aka Vx and Wz) to obtain wheel tick amount:
         msg = DFDF
 
         #TODO - Figure out how the data should be shared between them I am confusion
 
+        # CALCULATIONS
         # Take Vx as robot's linear velocity and Wz as robots angular velocity (Change with topic publish, this goes in a callback)
         # Calculate individual linear wheel velocities (from cmd_vel Vx and Wz given values)
         V_right_wheel = V_robot + w_robot * wheel_axel_width/2 #TODO Change V_robot and w_robot to the correct connected variables to the msg object 
@@ -80,15 +84,20 @@ class EncoderNode(Node):
         degrees_right = w_right_deg/t
         degrees_left = w_left_deg/t
 
-        # Calculate the ticks the encoder has/should count - CUMULATIVE AMOUNTS
+        # Calculate the ticks the encoder has/should count - CUMULATIVE AMOUNTS 
         right_ticks = DFDF#TODO Change to msg object variables
         left_ticks = DFDF#TODO Change to msg object variables
-
+    
+        # Pass value to msg attributes and publish
+        DFDF
+    
 # only calculate when callback called, but how do i make it cummulative? 
-
 
 # one call back per channel connection
 
-    #def
+#def
 
 # def main()
+
+if __name__ == '__main__':
+    main()

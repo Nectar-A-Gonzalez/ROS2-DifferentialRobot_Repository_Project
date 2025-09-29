@@ -25,15 +25,22 @@ from
 
 class KinematicsNode(Node):
     def __init__(self):
-        super.__init__()
+        super.__init__('kinematics_node') #name attribute 
         # SUBSCRIBER TO /wheel_ticks (left tick amount, right tick amount; cummulative)
+        FGG
         # PUBLISHER TO /pose (after calculating 2D pose from wheel ticks)
+        SSR
         # SERVER TO /reset_pose (set pose as a desired on, #assume clear wheel tick amounts)
+        HJHJ
+
+    #SUBSCRIBER CALLBACK
+    def 
+    #PUBLISHER CALLBACK
 
 
-def main(ARGS=None): #THIS INPUT CFHANGES EVERYSINGLE EFFING TIME WHAT THE HECK IS IT SUPPOSED TO DAMN BE BRO???????
-    rclpy.init(args=args)
-    
+def main(ARGS=None): #Input arguments are set to None (Classtype), 
+    rclpy.init(args=args) #Input arguments are reset to their original values for usage. Just passed along by main()
+
 
 if __name__ == '__main__':
     main()
