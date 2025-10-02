@@ -10,6 +10,7 @@ from rclpy.node import Node
 import numpy as np
 from geometry_msgs.msg import Twist #base ros2 installation
 from diffrobot_interfaces.msg import WheelTicks #custom pkg
+import robot_parameters #Robot's geometrical configuration
 
 # SIMUL INPUT
 # Vx - (meters/second)
@@ -29,14 +30,6 @@ from diffrobot_interfaces.msg import WheelTicks #custom pkg
 # builtin_interfaces/Time stamp
 # int32 left_ticks
 # int32 right_ticks
-
-# Variables for configuration (CHANGEABLE): #TODO-MENTION THIS IN THE README and give the test values
-# These do not vary from velocity command to velocity command
-wheel_radius = 0.0889 #(meters) 
-wheel_axel_width = 0.2032 #(meters)
-encoder_resolution = 500 #Pulses per Rotation PPR
-t = 1 #(seconds) #time the velocity is applied for
-
 class EncoderNode(Node): 
     def __init__(self):
         super.__init__("encoder_node") #name attribute
