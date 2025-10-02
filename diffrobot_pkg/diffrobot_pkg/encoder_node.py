@@ -10,7 +10,7 @@ from rclpy.node import Node
 import numpy as np
 from geometry_msgs.msg import Twist #base ros2 installation
 from diffrobot_interfaces.msg import WheelTicks #custom msg from pkg
-import robot_parameters #Robot's geometrical configuration
+from robot_parameters import wheel_radius, wheel_axel_width, encoder_resolution #Robot's geometrical configuration
 
 # SIMUL INPUT
 # Vx - (meters/second)
@@ -30,6 +30,7 @@ import robot_parameters #Robot's geometrical configuration
 # builtin_interfaces/Time stamp
 # int32 left_ticks
 # int32 right_ticks
+
 class EncoderNode(Node): 
     def __init__(self):
         super.__init__("encoder_node") #name attribute
@@ -44,13 +45,13 @@ class EncoderNode(Node):
     
 
     def sub_cmdvel_callback(self,msg:Twist):
-        # Runs everytime it recieves a msg through /cmd_vel topic #FLAG
-        self.get_logger().info(f'The robot currently travels:{msg.linear.x} m/s and {msg.angular.z}rad/s') #FLAG
+        # Runs everytime it recieves a msg through /cmd_vel topic #TODO-FLAG
+        self.get_logger().info(f'The robot currently travels:{msg.linear.x} m/s and {msg.angular.z}rad/s') #TODO-FLAG
         # Stored message into attribute so they are accesible for the publisher # Attribute created at method run
         self.Twist_data_instance = msg
 
     
-    def pub_wheelticks_callback(self, msg:WheelTicks): 
+    def pub_wheelticks_callback(self):
         msg = WheelTicks()
         # Run this function every 0.05 seconds #Calculated from Twist msg recieved (aka Vx and Wz) to obtain wheel tick amount:
         V_robot = self.Twist_data_instance.linear.x #Robot's linear velocity Vx (linear_x)
