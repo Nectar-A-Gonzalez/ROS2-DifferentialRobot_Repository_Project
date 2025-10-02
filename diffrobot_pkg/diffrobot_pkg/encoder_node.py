@@ -31,7 +31,7 @@ from diffrobot_interfaces.msg import WheelTicks #custom pkg
 # int32 right_ticks
 
 # Variables for configuration (CHANGEABLE): #TODO-MENTION THIS IN THE README and give the test values
-# These do not varie from velocity command to velocity command
+# These do not vary from velocity command to velocity command
 wheel_radius = 0.0889 #(meters) 
 wheel_axel_width = 0.2032 #(meters)
 encoder_resolution = 500 #Pulses per Rotation PPR
