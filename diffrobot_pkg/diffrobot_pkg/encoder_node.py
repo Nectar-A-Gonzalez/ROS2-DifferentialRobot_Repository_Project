@@ -10,7 +10,7 @@ from rclpy.node import Node
 import numpy as np
 from geometry_msgs.msg import Twist #base ros2 installation
 from diffrobot_interfaces.msg import WheelTicks #custom msg from pkg
-from robot_parameters import wheel_radius, wheel_axel_width, encoder_resolution #Robot's geometrical configuration
+from robot_parameters import wheel_radius, wheel_axel_width, encoder_resolution, t #Robot's configuration
 
 # SIMUL INPUT
 # Vx - (meters/second)
@@ -72,8 +72,8 @@ class EncoderNode(Node):
         w_left_deg = w_left * (180/np.pi)
 
         # Divide by time the angular velocity is applied to get the degrees the wheel turned
-        degrees_right = w_right_deg/t
-        degrees_left = w_left_deg/t
+        degrees_right = w_right_deg*t #TODO-VERIFY CORRECTION (from w/t to w*t)
+        degrees_left = w_left_deg*t
 
         # Calculate the ticks the encoder has/should count - CUMULATIVE AMOUNTS 
         # Also pass values to msg attributes in one go
