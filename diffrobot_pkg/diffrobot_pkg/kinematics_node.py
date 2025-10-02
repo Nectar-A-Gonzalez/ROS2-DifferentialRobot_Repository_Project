@@ -7,8 +7,10 @@
 
 import rclpy
 import rclpy.Node as Node
+import numpy as np
 from diffrobot_interfaces.msg import WheelTicks, Pose #custom msg from pkg
 from diffrobot_interfaces.srv import SetPose #custom srv message from pkg
+from robot_parameters import wheel_radius, wheel_axel_width, encoder_resolution, t #Robot's configuration
 
 # SIMUL Input
 
@@ -49,14 +51,39 @@ class KinematicsNode(Node):
     # PUBLISHER CALLBACK
     def pub_pose_callback(self):
         msg = Pose()
+        # Calculate the position using wheel ticks amounts:
+        # Rename the data for readability
+        right_ticks = self.WheelTicks_data_instance.right_ticks
+        left_ticks = self.WheelTicks_data_instance.left_ticks
+
+        # Calculate linear wheel velocities: #TODO-Verify if actually use linear velocities??
+        degrees_right = (360/encoder_resolution)*right_ticks
+        degrees_left = (360/encoder_resolution)*left_ticks
+
+        w_right_deg = degrees_right/t 
+        w_left_deg = degrees_left/t
+
+        w_right = w_right_deg*(np.pi/180)
+        w_left = w_left_deg*(np.pi/180)
+
+        V_right_wheel = w_right*wheel_radius
+        V_left_wheel = w_left*wheel_radius
+
+        # Calculate position with Diff. Drive Kinematics
 
 
-         #TODO-REMEMBER CALCULATE DIFFERENCE AND ONLY USE DIFFERENCE
+        
+        
+
+        #TODO-REMEMBER CALCULATE DIFFERENCE AND ONLY USE DIFFERENCE
+
+        # Calculate position - only for when wheel ticks change well actually? #TODO-Figure this out
+        # you get the velocity but umm? uhhh velocity could be well umm? #TODO-Figure this out
+        if 
 
 
-
-    # Verify with values of msg before as to not be same values, since encoder is cummulative
-    # If value is same as before (since this publishes on a timer not on input)
+        # Verify with values of msg before as to not be same values, since encoder is cummulative
+        # If value is same as before (since this publishes on a timer not on input)
 
 
 
