@@ -7,7 +7,7 @@
 
 import rclpy
 import rclpy.Node as Node
-from 
+#from 
 
 # SIMUL Input
 
@@ -34,9 +34,13 @@ class KinematicsNode(Node):
         HJHJ
 
     #SUBSCRIBER CALLBACK
-    def 
+    #def ()
     #PUBLISHER CALLBACK
 
+
+
+    # Verify with values of msg before as to not be same values, since encoder is cummulative
+    # If value is same as before (since this publishes on a timer not on input)
 
 def main(ARGS=None): #Input arguments are set to None (Classtype), 
     rclpy.init(args=args) #Input arguments are reset to their original values for usage. Just passed along by main()

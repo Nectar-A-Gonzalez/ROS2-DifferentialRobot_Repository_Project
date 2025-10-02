@@ -34,8 +34,9 @@ from diffrobot_interfaces.msg import WheelTicks #custom pkg
 # These do not varie from velocity command to velocity command
 wheel_radius = DFDF #(meters)
 wheel_axel_width = DFDF #(meters)
-encoder_tick_amount = DFDF #TODO-CHANGE TO ACTUAL TERMINOLOGY BROSKI
-ticks_per_degree = encoder_tick_amount/360
+# encoder_tick_amount = DFDF #TODO#Encoder tick amount
+# ticks_per_degree = encoder_tick_amount/360
+encoder_resolution = DFDF #Pulses per Rotation PPR
 t = 1 #(seconds) #time the velocity is applied for
 
 #### do i need to include these variables as input for them to be used????? #TODO - Verify this 
@@ -50,26 +51,26 @@ class EncoderNode(Node):
         # PUBLISHER TO /wheel_ticks TOPIC AT 20Hz (~20 times per second)
         self.publisher_ = self.create_publisher(WheelTicks, 'wheel_ticks', 25) # msg class,topic name (topic seems to be created here), allowable data reserve #FIX Research later
         timer_period = 0.05 #seconds #time interval it will publish/run the callback at #Publish 20Hz -> publish each 0.05 seconds
-        self.pub_timer = self.create_timer(timer_period, self.pub_wheelticks_callback)
-        self.i = 0
-
+        self.pub_timer = self.create_timer(timer_period, self.pub_wheelticks_callback)         
     
-    def sub_cmdvel_callback(self,msg:DFDF):
+
+    def sub_cmdvel_callback(self,msg:Twist):
         # Runs everytime it recieves a msg through /cmd_vel topic #FLAG
-        self.get_logger().info(f'The robot currently travels:{msg.data}.') #FLAG
-        dfdf
+        self.get_logger().info(f'The robot currently travels:{msg.linear.x} m/s and {msg.angular.z}rad/s') #FLAG
+        # Stored message into attribute so they are accesible for the publisher # Attribute created at method run
+        self.Twist_data_instance = msg
 
     
-    def pub_wheelticks_callback(self, msg:DFDF):
+    def pub_wheelticks_callback(self, msg:WheelTicks): 
+        msg = WheelTicks()
         # Run this function every 0.05 seconds #Calculated from Twist msg recieved (aka Vx and Wz) to obtain wheel tick amount:
-        msg = DFDF
+        V_robot = self.Twist_data_instance.linear.x #Robot's linear velocity Vx (linear_x)
+        w_robot = self.Twist_data_instance.angular.z #Robot's angular velocity Wz (angular_z)
 
-        #TODO - Figure out how the data should be shared between them I am confusion
-
-        # CALCULATIONS
+        # CALCULATIONS:
         # Take Vx as robot's linear velocity and Wz as robots angular velocity (Change with topic publish, this goes in a callback)
         # Calculate individual linear wheel velocities (from cmd_vel Vx and Wz given values)
-        V_right_wheel = V_robot + w_robot * wheel_axel_width/2 #TODO Change V_robot and w_robot to the correct connected variables to the msg object 
+        V_right_wheel = V_robot + w_robot * wheel_axel_width/2
         V_left_wheel = V_robot - w_robot * wheel_axel_width/2 
 
         # Convert to angular velocities (per wheel)
@@ -85,19 +86,29 @@ class EncoderNode(Node):
         degrees_left = w_left_deg/t
 
         # Calculate the ticks the encoder has/should count - CUMULATIVE AMOUNTS 
-        right_ticks = DFDF#TODO Change to msg object variables
-        left_ticks = DFDF#TODO Change to msg object variables
-    
+        # Also pass values to msg attributes in one go
+
+        right_ticks = (encoder_pulses_per_revolution/360)*degrees_right #TODO Change to msg object variables
+        left_ticks = DFDF #TODO Change to msg object variables
+
+        
         # Pass value to msg attributes and publish
-        DFDF
+        msg.right_ticks = DFDF
+        msg.left_ticks = DFDF
+        
     
 # only calculate when callback called, but how do i make it cummulative? 
 
-# one call back per channel connection
+def main(args=None):
+    rclpy.init(args=args) #Initiate
 
-#def
+    encoder_node = EncoderNode() #Establish attribute Node name as varible for Node object
+    rclpy.spin(encoder_node)
 
-# def main()
+    # Destroy the node explicitly
+    # (optional... will be done automatically)
+    encoder_node.destroy_node()
+    rclpy.shutdown()
 
 if __name__ == '__main__':
     main()
