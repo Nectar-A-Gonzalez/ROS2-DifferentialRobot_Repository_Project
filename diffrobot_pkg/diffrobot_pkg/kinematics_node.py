@@ -7,7 +7,6 @@
 
 import rclpy
 import rclpy.Node as Node
-#from 
 
 # SIMUL Input
 

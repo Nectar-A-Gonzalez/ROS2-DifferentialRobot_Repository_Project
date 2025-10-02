@@ -39,8 +39,6 @@ wheel_axel_width = DFDF #(meters)
 encoder_resolution = DFDF #Pulses per Rotation PPR
 t = 1 #(seconds) #time the velocity is applied for
 
-#### do i need to include these variables as input for them to be used????? #TODO - Verify this 
-
 class EncoderNode(Node): 
     def __init__(self):
         super.__init__("encoder_node") #name attribute
@@ -87,17 +85,17 @@ class EncoderNode(Node):
 
         # Calculate the ticks the encoder has/should count - CUMULATIVE AMOUNTS 
         # Also pass values to msg attributes in one go
+        msg.right_ticks = (encoder_resolution/360)*degrees_right #Pulses per rotation/360 * degrees wheel rotated due to speed
+        msg.left_ticks = (encoder_resolution/360)*degrees_left
 
-        right_ticks = (encoder_pulses_per_revolution/360)*degrees_right #TODO Change to msg object variables
-        left_ticks = DFDF #TODO Change to msg object variables
+        # Publish msg data established to topic
+        self.publisher_.publish(msg)
+        # Store msg data in Node's logger - Made one line just in case it doesnot support multiline logs
+        self.get_logger().info(
+            f"The robot's wheels have rotated:" 
+            f"left wheel: {msg.left_ticks} ticks, right wheel:{msg.right_ticks} ticks.")
+        
 
-        
-        # Pass value to msg attributes and publish
-        msg.right_ticks = DFDF
-        msg.left_ticks = DFDF
-        
-    
-# only calculate when callback called, but how do i make it cummulative? 
 
 def main(args=None):
     rclpy.init(args=args) #Initiate
