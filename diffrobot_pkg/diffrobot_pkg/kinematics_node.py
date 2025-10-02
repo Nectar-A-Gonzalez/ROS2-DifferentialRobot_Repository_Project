@@ -7,6 +7,10 @@
 
 import rclpy
 import rclpy.Node as Node
+# import numpy as np
+# from geometry_msgs.msg import Twist #base ros2 installation
+# from diffrobot_interfaces.msg import WheelTicks #custom pkg
+# import robot_parameters #Robot's geometrical configuration
 
 # SIMUL Input
 
@@ -21,7 +25,7 @@ import rclpy.Node as Node
 # float32 y
 # float32 theta
 
-
+# Math - TODO - lINK Formula paper in the readme
 class KinematicsNode(Node):
     def __init__(self):
         super.__init__('kinematics_node') #name attribute 

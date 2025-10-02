@@ -23,3 +23,6 @@ dfdfdf<br>
 
     df
     dfdf
+
+### References (SOME)<br>
+[Differential Drive Kinematics Notes by The University of Columbia](https://www.cs.columbia.edu/~allen/F17/NOTES/icckinematics.pdf "CS W4733 NOTES - Differential Drive Robots")

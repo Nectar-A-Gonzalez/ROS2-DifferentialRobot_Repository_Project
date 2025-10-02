@@ -9,7 +9,7 @@ import rclpy #I assume rclpy is part of base ROS2 installation and that is why i
 from rclpy.node import Node
 import numpy as np
 from geometry_msgs.msg import Twist #base ros2 installation
-from diffrobot_interfaces.msg import WheelTicks #custom pkg
+from diffrobot_interfaces.msg import WheelTicks #custom msg from pkg
 import robot_parameters #Robot's geometrical configuration
 
 # SIMUL INPUT
