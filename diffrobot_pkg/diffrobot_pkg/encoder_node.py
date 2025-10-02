@@ -34,8 +34,6 @@ from diffrobot_interfaces.msg import WheelTicks #custom pkg
 # These do not varie from velocity command to velocity command
 wheel_radius = DFDF #(meters)
 wheel_axel_width = DFDF #(meters)
-# encoder_tick_amount = DFDF #TODO#Encoder tick amount
-# ticks_per_degree = encoder_tick_amount/360
 encoder_resolution = DFDF #Pulses per Rotation PPR
 t = 1 #(seconds) #time the velocity is applied for
 
