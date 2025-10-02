@@ -7,10 +7,8 @@
 
 import rclpy
 import rclpy.Node as Node
-# import numpy as np
-# from geometry_msgs.msg import Twist #base ros2 installation
-# from diffrobot_interfaces.msg import WheelTicks #custom pkg
-# import robot_parameters #Robot's geometrical configuration
+from diffrobot_interfaces.msg import WheelTicks, Pose #custom msg from pkg
+from diffrobot_interfaces.srv import SetPose #custom srv message from pkg
 
 # SIMUL Input
 
@@ -25,27 +23,31 @@ import rclpy.Node as Node
 # float32 y
 # float32 theta
 
-# Math - TODO - lINK Formula paper in the readme
+
 class KinematicsNode(Node):
     def __init__(self):
         super.__init__('kinematics_node') #name attribute 
         # SUBSCRIBER TO /wheel_ticks (left tick amount, right tick amount; cummulative)
-        FGG
+        self.subscription = self.create_subscription(WheelTicks, 'wheel_ticks', self.sub_wheelticks_callback, 25) #msg class type,topic name, callback, reserve amount)
         # PUBLISHER TO /pose (after calculating 2D pose from wheel ticks)
-        SSR
+        self.publisher_ = self.create_publisher(Pose, 'wheel_ticks', 25)
+
         # SERVER TO /reset_pose (set pose as a desired on, #assume clear wheel tick amounts)
         HJHJ
 
-    #SUBSCRIBER CALLBACK
-    #def ()
-    #PUBLISHER CALLBACK
+    # SUBSCRIBER CALLBACK
+    def sub_wheelticks_callback(self, msg:WheelTicks):
+        dfd
+
+
+    # PUBLISHER CALLBACK
 
 
 
     # Verify with values of msg before as to not be same values, since encoder is cummulative
     # If value is same as before (since this publishes on a timer not on input)
 
-def main(ARGS=None): #Input arguments are set to None (Classtype), 
+def main(args=None): #Input arguments are set to None (Classtype), arguments for ros2 parameters TODO-CHECK INFO
     rclpy.init(args=args) #Input arguments are reset to their original values for usage. Just passed along by main()
 
 
