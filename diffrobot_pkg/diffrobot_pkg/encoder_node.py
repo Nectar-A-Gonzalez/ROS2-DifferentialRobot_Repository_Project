@@ -45,8 +45,8 @@ class EncoderNode(Node):
     
 
     def sub_cmdvel_callback(self,msg:Twist):
-        # Runs everytime it recieves a msg through /cmd_vel topic #TODO-FLAG
-        self.get_logger().info(f'The robot currently travels:{msg.linear.x} m/s and {msg.angular.z}rad/s') #TODO-FLAG
+        # Runs everytime it recieves a msg through /cmd_vel topic
+        self.get_logger().info(f'The robot currently travels:{msg.linear.x} m/s and {msg.angular.z}rad/s')
         # Stored message into attribute so they are accesible for the publisher # Attribute created at method run
         self.Twist_data_instance = msg
 
@@ -72,7 +72,7 @@ class EncoderNode(Node):
         w_left_deg = w_left * (180/np.pi)
 
         # Divide by time the angular velocity is applied to get the degrees the wheel turned
-        degrees_right = w_right_deg*t #TODO-VERIFY CORRECTION (from w/t to w*t)
+        degrees_right = w_right_deg*t # TODO-VERIFY CORRECTION (from w/t to w*t)
         degrees_left = w_left_deg*t
 
         # Calculate the ticks the encoder has/should count - CUMULATIVE AMOUNTS 

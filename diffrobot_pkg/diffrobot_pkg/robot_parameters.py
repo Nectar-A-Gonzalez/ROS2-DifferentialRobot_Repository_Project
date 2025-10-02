@@ -1,4 +1,4 @@
-# Robot's geometrical configuration:
+# Robot's configuration:
 # Variables for configuration (CHANGEABLE): #TODO-MENTION THIS IN THE README and give the test values
 # These do not vary from velocity command to velocity command
 wheel_radius = 0.0889 #(meters) 
