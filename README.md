@@ -8,7 +8,6 @@ The robot is given a velocity at which it should move, the encoders are to
 ## How to build the package in your own workspace:
 To build the package in the works space, first create your workspace folder dfd<br>
 
-
     mkdir -p ros2_ws/src dfdfdfdff
     dfdf
 

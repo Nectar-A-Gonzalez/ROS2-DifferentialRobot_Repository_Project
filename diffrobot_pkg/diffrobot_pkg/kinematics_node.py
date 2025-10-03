@@ -107,7 +107,7 @@ class KinematicsNode(Node):
         # Si requested position is actually posible or not
         response.accepted = dfdf
         #Current postion, if not accepted, no changes.
-        response.status = dfdf
+        response.status = f"Requested position: {}, Final position"
 
                 
 def main(args=None): #Input arguments are set to None (Classtype), arguments for ros2 parameters #TODO-CHECK INFO
