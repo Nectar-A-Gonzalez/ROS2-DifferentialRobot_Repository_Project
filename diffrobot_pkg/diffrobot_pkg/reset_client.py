@@ -2,3 +2,5 @@
 # Tasks:
 # - Calls /reset_pose with values from CLI args and prints the result. 
 
+#Accept client command line values 
+#Sets values at 

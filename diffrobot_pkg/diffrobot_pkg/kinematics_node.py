@@ -9,7 +9,7 @@ import rclpy
 import rclpy.Node as Node
 import numpy as np
 from diffrobot_interfaces.msg import WheelTicks, Pose #custom msg from pkg
-from diffrobot_interfaces.srv import SetPose #custom srv message from pkg
+from diffrobot_interfaces.srv import Pose2DStamped, SetPose #custom msg and srv message from pkg
 from robot_parameters import wheel_radius, wheel_axel_width, encoder_resolution, t #Robot's configuration
 
 # SIMUL Input
@@ -27,17 +27,24 @@ from robot_parameters import wheel_radius, wheel_axel_width, encoder_resolution,
 
 class KinematicsNode(Node):
     def __init__(self):
-        super.__init__('kinematics_node') #name attribute 
+        super.__init__('kinematics_node') #name attribute
+        self.current_position = [0,0,0] # TODO - verify if best to make a vector
+
         # SUBSCRIBER TO /wheel_ticks (left tick amount, right tick amount; cummulative)
         self.subscription = self.create_subscription(WheelTicks, 'wheel_ticks', self.sub_wheelticks_callback, 25) #msg class type,topic name, callback, reserve amount)
         
         # PUBLISHER TO /pose (after calculating 2D pose from wheel ticks)
-        self.publisher_ = self.create_publisher(Pose, 'pose', 25)
+        self.publisher_ = self.create_publisher(Pose2DStamped, 'pose', 25)
         timer_period = 0.05 #seconds #Using same Hz as EncoderNode # TODO-Verify if same HZ is good idea ASK
         self.pub_timer = self.create_timer(timer_period, self.pub_pose_callback) 
         
         # SERVER TO /reset_pose (set pose as a desired on, #assume clear wheel tick amounts)
-        HJHJ #TODO-THIS.
+        self.srv = self.create_service(SetPose,"reset_pose", self.server_resetpose_callback)
+        #Uses reset pose srv message type - Remember uses a SERVICE CHANNEL NOT A TOPIC CHANNEL
+
+
+
+
 
     # SUBSCRIBER CALLBACK
     def sub_wheelticks_callback(self, msg:WheelTicks):
@@ -46,6 +53,7 @@ class KinematicsNode(Node):
             f"The robot's wheels have rotated:" 
             f"left wheel: {msg.left_ticks} ticks, right wheel:{msg.right_ticks} ticks.") #Same as Encoder's publisher
         self.WheelTicks_data_instance = msg #Stores the recieved msg # TODO-Maybe move all the loggers after code part??
+
 
     # PUBLISHER CALLBACK
     def pub_pose_callback(self):
@@ -68,8 +76,7 @@ class KinematicsNode(Node):
         V_right_wheel = w_right*wheel_radius
         V_left_wheel = w_left*wheel_radius
 
-        # Calculate position with Diff. Drive Kinematics 
-        
+        # Calculate position with Diff. Drive Kinematics
 
         
         
@@ -80,10 +87,31 @@ class KinematicsNode(Node):
         #if 
 
 
-        # Verify with values of msg before as to not be same values, since encoder is cummulative
+        # Verify with values of msg before as to not be same values, since encoder is cummulative #TODO-Figure out math first to see if this is even necesary
         # If value is same as before (since this publishes on a timer not on input)
 
+        # Store calculated current position in self attribute
 
+
+    # SERVER CALLBACK
+    def server_resetpose_callback(self, request, response):
+        #Execute the service and give response values:
+        # Take clients request and apply to the self current position attribute #TODO-VERIFY IF CORRECT
+        x_new = request.x
+        y_new = request.y
+        theta_new = request.theta
+
+        # Establish response srv values for the message #TODO-VERIFY IF CORRECT 
+        response.accepted = dfdf
+        response.status = dfdf
+
+        
+
+
+
+        
+
+        
 
 def main(args=None): #Input arguments are set to None (Classtype), arguments for ros2 parameters # TODO-CHECK INFO
     rclpy.init(args=args) #Input arguments are reset to their original values for usage. Just passed along by main()
