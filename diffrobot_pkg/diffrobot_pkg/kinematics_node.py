@@ -57,7 +57,7 @@ class KinematicsNode(Node):
 
     # PUBLISHER CALLBACK
     def pub_pose_callback(self):
-        msg = Pose()
+        msg = Pose2DStamped()
         # Calculate the position using wheel ticks amounts:
         # Rename the data for readability
         right_ticks = self.WheelTicks_data_instance.right_ticks
@@ -100,6 +100,10 @@ class KinematicsNode(Node):
         x_new = request.x
         y_new = request.y
         theta_new = request.theta
+        #Apply to current position attribute
+        self.current_position[0] = x_new
+        self.current_position[1] = y_new
+        self.current_position[2] = theta_new
 
         # Establish response srv values for the message #TODO-VERIFY IF CORRECT 
         response.accepted = dfdf
