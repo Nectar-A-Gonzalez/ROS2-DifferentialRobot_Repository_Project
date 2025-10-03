@@ -25,3 +25,5 @@ dfdfdf<br>
 
 ### References (SOME)<br>
 [Differential Drive Kinematics Notes by The University of Columbia](https://www.cs.columbia.edu/~allen/F17/NOTES/icckinematics.pdf "CS W4733 NOTES - Differential Drive Robots")
+[Kinematics of Differential Drive Robots and Odometry
+Video by Engineering Educator Academy](https://www.youtube.com/watch?v=RZlZcDxQ8P4 "Kinematics of Differential Drive Robots and Odometry")
