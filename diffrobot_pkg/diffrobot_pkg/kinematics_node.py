@@ -56,6 +56,7 @@ class KinematicsNode(Node):
     # PUBLISHER CALLBACK
     def pub_pose_callback(self):
         msg = Pose2DStamped()
+
         # Calculate the position using wheel ticks amounts:
         # Rename the data for readability
         right_ticks = self.WheelTicks_data_instance.right_ticks
@@ -75,7 +76,7 @@ class KinematicsNode(Node):
         V_left_wheel = w_left*wheel_radius
 
         # Calculate position with Diff. Drive Kinematics
-
+        
 
                
         
@@ -107,8 +108,8 @@ class KinematicsNode(Node):
         # Si requested position is actually posible or not
         response.accepted = dfdf
         #Current postion, if not accepted, no changes.
-        response.status = f"Requested position: {}, Final position"
-
+        response.status = f"Requested position: {KK}, Final position: {IKK}"
+# SEE IF THERE IS A PUBLISH OR SIMILAR COMMAND #TODO
                 
 def main(args=None): #Input arguments are set to None (Classtype), arguments for ros2 parameters #TODO-CHECK INFO
     rclpy.init(args=args) #Input arguments are reset to their original values for usage. Just passed along by main()
