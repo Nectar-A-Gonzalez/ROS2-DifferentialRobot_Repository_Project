@@ -44,8 +44,6 @@ class KinematicsNode(Node):
 
 
 
-
-
     # SUBSCRIBER CALLBACK
     def sub_wheelticks_callback(self, msg:WheelTicks):
         # Runs everytime it recieves a msg through /wheel_ticks topic
@@ -78,14 +76,14 @@ class KinematicsNode(Node):
 
         # Calculate position with Diff. Drive Kinematics
 
-        
+
+               
         
         #TODO-REMEMBER CALCULATE DIFFERENCE AND ONLY USE DIFFERENCE
 
         # Calculate position - only for when wheel ticks change well actually? # TODO-Figure this out
         # you get the velocity but umm? uhhh velocity could be well umm? # TODO-Figure this out
         #if 
-
 
         # Verify with values of msg before as to not be same values, since encoder is cummulative #TODO-Figure out math first to see if this is even necesary
         # If value is same as before (since this publishes on a timer not on input)
@@ -96,7 +94,7 @@ class KinematicsNode(Node):
     # SERVER CALLBACK
     def server_resetpose_callback(self, request, response):
         #Execute the service and give response values:
-        # Take clients request and apply to the self current position attribute #TODO-VERIFY IF CORRECT
+        # Take clients request and apply to the self current position attribute #             TODO-VERIFY IF CORRECT
         x_new = request.x
         y_new = request.y
         theta_new = request.theta
@@ -105,19 +103,14 @@ class KinematicsNode(Node):
         self.current_position[1] = y_new
         self.current_position[2] = theta_new
 
-        # Establish response srv values for the message #TODO-VERIFY IF CORRECT 
+        # Establish response srv values for the message # TODO-VERIFY IF CORRECT 
+        # Si requested position is actually posible or not
         response.accepted = dfdf
+        #Current postion, if not accepted, no changes.
         response.status = dfdf
 
-        
-
-
-
-        
-
-        
-
-def main(args=None): #Input arguments are set to None (Classtype), arguments for ros2 parameters # TODO-CHECK INFO
+                
+def main(args=None): #Input arguments are set to None (Classtype), arguments for ros2 parameters #TODO-CHECK INFO
     rclpy.init(args=args) #Input arguments are reset to their original values for usage. Just passed along by main()
     kinematics_node = KinematicsNode()
     rclpy.spin(kinematics_node)

@@ -44,6 +44,7 @@ class EncoderNode(Node):
         self.pub_timer = self.create_timer(timer_period, self.pub_wheelticks_callback)         
     
 
+    
     def sub_cmdvel_callback(self,msg:Twist):
         # Runs everytime it recieves a msg through /cmd_vel topic
         self.get_logger().info(f'The robot currently travels:{msg.linear.x} m/s and {msg.angular.z}rad/s')
@@ -88,7 +89,7 @@ class EncoderNode(Node):
             f"left wheel: {msg.left_ticks} ticks, right wheel:{msg.right_ticks} ticks.")
         
 
-
+        
 def main(args=None):
     rclpy.init(args=args) #Initiate
 
