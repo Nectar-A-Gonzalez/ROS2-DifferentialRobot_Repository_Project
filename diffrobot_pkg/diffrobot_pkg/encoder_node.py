@@ -41,7 +41,9 @@ class EncoderNode(Node):
         # PUBLISHER TO /wheel_ticks TOPIC AT 20Hz (~20 times per second)
         self.publisher_ = self.create_publisher(WheelTicks, 'wheel_ticks', 25) # msg class,topic name (topic seems to be created here), allowable data reserve #TODO - Research later
         timer_period = 0.05 #seconds #time interval it will publish/run the callback at #Publish 20Hz -> publish each 0.05 seconds
-        self.pub_timer = self.create_timer(timer_period, self.pub_wheelticks_callback)         
+        self.pub_timer = self.create_timer(timer_period, self.pub_wheelticks_callback)    
+        #hELLO
+        #hELLO HELLLO HELLO HELLO
     
 
     
