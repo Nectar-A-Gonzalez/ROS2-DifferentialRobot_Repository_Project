@@ -76,10 +76,7 @@ class KinematicsNode(Node):
         V_left_wheel = w_left*wheel_radius
 
         # Calculate position with Diff. Drive Kinematics
-        
-
-               
-        
+    
         #TODO-REMEMBER CALCULATE DIFFERENCE AND ONLY USE DIFFERENCE
 
         # Calculate position - only for when wheel ticks change well actually? # TODO-Figure this out
@@ -95,7 +92,7 @@ class KinematicsNode(Node):
     # SERVER CALLBACK
     def server_resetpose_callback(self, request, response):
         #Execute the service and give response values:
-        # Take clients request and apply to the self current position attribute #             TODO-VERIFY IF CORRECT
+        # Take clients request and apply to the self current position attribute #TODO-VERIFY IF CORRECT
         x_new = request.x
         y_new = request.y
         theta_new = request.theta
@@ -110,7 +107,9 @@ class KinematicsNode(Node):
         #Current postion, if not accepted, no changes.
         response.status = f"Requested position: {KK}, Final position: {IKK}"
 # SEE IF THERE IS A PUBLISH OR SIMILAR COMMAND #TODO
-                
+ 
+ 
+               
 def main(args=None): #Input arguments are set to None (Classtype), arguments for ros2 parameters #TODO-CHECK INFO
     rclpy.init(args=args) #Input arguments are reset to their original values for usage. Just passed along by main()
     kinematics_node = KinematicsNode()
