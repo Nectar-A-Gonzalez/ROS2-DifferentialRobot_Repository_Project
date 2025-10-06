@@ -10,6 +10,7 @@ To build the package in the works space, first create your workspace folder dfd<
 
     mkdir -p ros2_ws/src dfdfdfdff
     dfdf
+    sdsdsd
 
 ## Commands to test the pub/sub and service/client communications:
 sdsdsdsd<br>
