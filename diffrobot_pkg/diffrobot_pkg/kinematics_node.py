@@ -76,10 +76,12 @@ class KinematicsNode(Node):
         V_left_wheel = w_left*wheel_radius
 
         # Calculate position with Diff. Drive Kinematics
+        
     
         #TODO-REMEMBER CALCULATE DIFFERENCE AND ONLY USE DIFFERENCE
 
         # Calculate position - only for when wheel ticks change well actually? # TODO-Figure this out
+
         # you get the velocity but umm? uhhh velocity could be well umm? # TODO-Figure this out
         #if 
 
