@@ -3,7 +3,7 @@
 <package format="3">
   <name>diffrobot_interfaces</name>
   <version>0.0.0</version>
-  <description>Custom msg and srv interfaces for a differential robot ROS2 program (especially the diffrobot_pkg).</description> 
+  <description>Custom msg and srv interfaces for a differential robot ROS2 program (the diffrobot_pkg).</description> 
   <maintainer email="nectargonzalez@outlook.com">Nectar A. Gonzalez Negron</maintainer>
   <license>Apache-2.0</license>
 
