@@ -8,13 +8,14 @@ The behavior is as follows:<br>
 - #Communicates to what Explain the ros way of communicating or just the data processing aspect, I think only the logical part #IDEA
 - #And maybe give instrutions to how to see ros communication nodes relationships. #IDEA
 
-
-The instructions given here are for a Linux OS dfdfdfdfdfd
+> [!Note] 
+> The instructions given here are for a Linux OS dfdfdfdfdfd
 
 
 ## How to build the package in your own workspace:
 To build the package in a workspace, you first need to create your workspace folder (if you don't already have one).<br>
-<br>
+
+
 ### To create a workspace
 To do that, in a terminal window write:
 
@@ -30,6 +31,9 @@ Finally, add the DiffRobot packages (diffrobot_pkg and diffrobot_interfaces).
 
 
     dfdf
+
+######       
+    java -jar .\target\myai-0.0.1-SNAPSHOT.jar  
 
 Here the diffrobot_pkg hold the dfdfdffdf code, while diffrobot_interfaces holds the necessary msg and srv templates for ROS2 communication.
 
@@ -48,6 +52,14 @@ dfdfdf<br>
 
     df
     dfdf
+```
+dfdf
+dfdf
+```
+
+```python copy
+x=15
+```
 
 
 ## Example Outputs Video - Using the test commands
