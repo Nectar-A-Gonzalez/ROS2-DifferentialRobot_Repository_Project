@@ -81,7 +81,6 @@ class KinematicsNode(Node):
         # V_right_wheel = w_right*wheel_radius
         # V_left_wheel = w_left*wheel_radius
 
-        
 
         # Calculate position with Diff. Drive Kinematics
         
@@ -89,7 +88,6 @@ class KinematicsNode(Node):
         if 
 
         elif 
-
 
 
         # Calculate position - only for when wheel ticks change well actually? # TODO-Figure this out
