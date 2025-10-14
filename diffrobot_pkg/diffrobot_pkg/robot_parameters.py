@@ -5,6 +5,7 @@ wheel_radius = 0.0889 #(meters)
 wheel_axel_width = 0.2032 #(meters)
 encoder_resolution = 500 #Pulses per Rotation PPR
 t = 1 #(seconds) #time the velocity is applied for
+# Here wheel radius is set as the same for both wheels, though it could be different
 
 #Future improvements - these as parameters for
 #the launch file might be recommended. So that they

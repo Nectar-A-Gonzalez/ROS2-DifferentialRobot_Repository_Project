@@ -50,7 +50,6 @@ class KinematicsNode(Node):
         #Uses reset pose srv message type - Remember uses a SERVICE CHANNEL NOT A TOPIC CHANNEL
 
 
-
     # SUBSCRIBER CALLBACK
     def sub_wheelticks_callback(self, msg:WheelTicks):
         # Runs everytime it recieves a msg through /wheel_ticks topic

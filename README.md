@@ -2,15 +2,14 @@
 These packages are used to model a differential drive robot that communicates via ROS2 - Jazzy Distro.
 The diffrobot_pkg includes the three nodes that are used to simulate the differential robots behavior.
 The behavior is as follows:<br>
-- The robot is given a velocity at which it should move, the encoders are to dfdfd
-- The encoders read the angular velocity of each wheel in terms of tics read per degree dfdf
+- The robot is given a velocity at which it should move, the encoders are to dfdfderere
+- The encoders read the angular velocity of each wheel in terms of tics read per degree dfdfererer
  
 - #Communicates to what Explain the ros way of communicating or just the data processing aspect, I think only the logical part #IDEA
 - #And maybe give instrutions to how to see ros communication nodes relationships. #IDEA
 
 > [!Note] 
-> The instructions given here are for a Linux OS dfdfdfdfdfd
-jkjjkj
+> The instructions given here are for a Linux OS.
 
 
 ## How to build the package in your own workspace:
@@ -19,7 +18,7 @@ To build the package in a workspace, you first need to create your workspace fol
 
 ### To create a workspace
 To do that, in a terminal window write:
-
+#####
     mkdir -p ros2_ws/src dfdfdfdff
     dfdf
     sdsdsd
@@ -57,5 +56,5 @@ dfdfdf<br>
 
 ### Some References<br>
 [Differential Drive Kinematics Notes by The University of Columbia](https://www.cs.columbia.edu/~allen/F17/NOTES/icckinematics.pdf "CS W4733 NOTES - Differential Drive Robots")<br>
-[Kinematics of Differential Drive Robots and Odometry
-Video by Engineering Educator Academy](https://www.youtube.com/watch?v=RZlZcDxQ8P4 "Kinematics of Differential Drive Robots and Odometry")
+[Kinematics of Differential Drive Robots and Odometry Video by Engineering Educator Academy](https://www.youtube.com/watch?v=RZlZcDxQ8P4 "Kinematics of Differential Drive Robots and Odometry")<br>
+[5.2. Motion Model for the Differential Drive Robot from "Introduction to Robotics and Perception" from Georgia Tech](https://www.roboticsbook.org/S52_diffdrive_actions.html "5.2. Motion Model for the Differential Drive Robo")<br>
