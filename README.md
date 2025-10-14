@@ -23,18 +23,16 @@ To do that, in a terminal window write:
     mkdir -p ros2_ws/src dfdfdfdff
     dfdf
     sdsdsd
+
 After creating your workspace, add the necessary workspace folders
 
     dfdfd
     dfdfdf
     dfdf
+
 Finally, add the DiffRobot packages (diffrobot_pkg and diffrobot_interfaces).
 
-
     dfdf
-
-######       
-    java -jar .\target\myai-0.0.1-SNAPSHOT.jar  
 
 Here the diffrobot_pkg hold the dfdfdffdf code, while diffrobot_interfaces holds the necessary msg and srv templates for ROS2 communication.
 
@@ -44,7 +42,6 @@ sdsdsdsd<br>
 
 To simulate a commanding velocity input, dfdf<br>
 
-
     ros2 pub dfdfdf at -rate 10
     dfd
     klklkl
@@ -53,21 +50,12 @@ dfdfdf<br>
 
     df
     dfdf
-```
-dfdf
-dfdf
-```
-
-```python copy
-x=15
-```
-
 
 ## Example Outputs Video - Using the test commands
 
 
 
-### References (SOME)<br>
+### Some References<br>
 [Differential Drive Kinematics Notes by The University of Columbia](https://www.cs.columbia.edu/~allen/F17/NOTES/icckinematics.pdf "CS W4733 NOTES - Differential Drive Robots")<br>
 [Kinematics of Differential Drive Robots and Odometry
 Video by Engineering Educator Academy](https://www.youtube.com/watch?v=RZlZcDxQ8P4 "Kinematics of Differential Drive Robots and Odometry")
