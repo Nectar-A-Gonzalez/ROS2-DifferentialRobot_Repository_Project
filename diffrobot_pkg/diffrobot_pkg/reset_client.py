@@ -2,8 +2,46 @@
 # Tasks:
 # - Calls /reset_pose with values from CLI args and prints the result. 
 
+# srv message example:
 
+import sys #To use command line values
+import rclpy
+from rclpy.node import Node
+from diffrobot_interfaces import SetPose
 
-#Accept client command line values 
-#Sets values at 
+class ResetClient(Node):
+    
+    def __init__(self):
+        super.__init__("reset_client")
+        self.cli = self.create_client(SetPose, 'reset_pose') # srv type, srv comm channel name, have to match
 
+        #~?? Time it will wait for, and if this function doesnt come back true aka the service is not active/available, it will keep in this loop.. waiting 
+        # It is a boolean #TODO Verify***
+        while not self.cli.wait_for_service(timeout_sec=1.0):
+            self.get_logger().info('service not available, waiting again...') #Stores in logger, not print TODO VERIFY
+        
+        # Makes object of the request section, After service is confirmed available
+        self.request = SetPose.Request()
+    
+    def send_request(self):
+        # Store the command line values in the request attributes correspondent
+        #Convert it to an integer, from command line input
+        self.request.x = int(sys.argv[1]) 
+        self.request.y = int(sys.argv[2])
+        self.request.theta = int(sys.argv[3])
+
+        # Sends the request to server and stores 
+        self.future = self.cli.call_async(self.request) #Stores status of if process done or not; also stores result as attribute here
+
+def main(args=None):
+    rclpy.init(args=args) #Allows that ROS2 commands given at command line pass to ROS itself
+    rclpy.spin.once(reset_client) #Use established name attribute
+    if reset_client.futute.done(): #Accesing the attributes with self aka the name
+        try:
+            response = reset_client.future.result() #future stores result after request to server
+        except Exception as e:
+            reset_client.get_logger().info(
+                'Service call failed %r' %
+            )            
+# TODO - Check IPad for best of the two client.py formats
+# and use the recommended one - the one from custom interfaces is better

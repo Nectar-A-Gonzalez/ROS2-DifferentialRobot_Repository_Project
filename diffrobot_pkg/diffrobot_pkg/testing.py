@@ -55,3 +55,17 @@ print(1+((0.5*0.30)/2))
 print(1+(0.5*0.30)/2)
 print(1+ 0.5*0.30/2)
 
+#----------------------------------------
+# From file kinematicsnode.py 
+# Calculate linear wheel velocities: # TODO-Verify if actually use linear velocities??
+degrees_right = (360/encoder_resolution)*right_ticks
+degrees_left = (360/encoder_resolution)*left_ticks
+
+w_right_deg = degrees_right/t 
+w_left_deg = degrees_left/t
+
+w_right = w_right_deg*(np.pi/180)
+w_left = w_left_deg*(np.pi/180)
+
+# V_right_wheel = w_right*wheel_radius
+# V_left_wheel = w_left*wheel_radius

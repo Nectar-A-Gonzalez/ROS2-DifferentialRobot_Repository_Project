@@ -9,7 +9,15 @@ endif()
 find_package(ament_cmake REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
-# find_package(<dependency> REQUIRED)
+find_package(builtin_interfaces REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
+
+rosidl_generate_interfaces(${PROJECT_NAME}
+  "msg/Pose2DStamped.msg"
+  "msg/Wheelticks.msg"
+  "srv/SetPose.srv"
+  DEPENDENCIES builtin_interfaces # Add packages that above messages depend on, in this case geometry_msgs for Sphere.msg
+) 
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -24,3 +32,6 @@ if(BUILD_TESTING)
 endif()
 
 ament_package()
+
+# These dont depend on Twist message, so no need to include it here
+# Built in interfaces require verification?? #TODO

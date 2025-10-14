@@ -19,7 +19,11 @@ setup(
     license='Apache-2.0',
     tests_require=['pytest'],
     entry_points={
-        'console_scripts': [ #TODO - ADD ENTRY POINTS FOR EXECUTABLES
+        'console_scripts': [ 
+            'kinematics_node'
+            'encoder_node'
+            'reset_client'
+            #TODO - ADD ENTRY POINTS FOR EXECUTABLES
         ],
     },
 )

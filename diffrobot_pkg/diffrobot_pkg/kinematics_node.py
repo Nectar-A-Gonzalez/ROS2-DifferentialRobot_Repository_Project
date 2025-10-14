@@ -29,6 +29,13 @@ class KinematicsNode(Node):
     def __init__(self):
         super.__init__('kinematics_node') #name attribute
         self.current_position = [0,0,0] # TODO - verify if best to make a vector
+        # Initial Position Values
+        self.x = 0
+        self.y = 0
+        self.theta = 0
+        # Initial "past" tick counts
+        self.right_ticks_past = 0
+        self.left_ticks_past = 0
 
         # SUBSCRIBER TO /wheel_ticks (left tick amount, right tick amount; cummulative)
         self.subscription = self.create_subscription(WheelTicks, 'wheel_ticks', self.sub_wheelticks_callback, 25) #msg class type,topic name, callback, reserve amount)
@@ -62,53 +69,91 @@ class KinematicsNode(Node):
         right_ticks = self.WheelTicks_data_instance.right_ticks
         left_ticks = self.WheelTicks_data_instance.left_ticks
 
-        # Calculate linear wheel velocities: # TODO-Verify if actually use linear velocities??
-        degrees_right = (360/encoder_resolution)*right_ticks
-        degrees_left = (360/encoder_resolution)*left_ticks
-
-        w_right_deg = degrees_right/t 
-        w_left_deg = degrees_left/t
-
-        w_right = w_right_deg*(np.pi/180)
-        w_left = w_left_deg*(np.pi/180)
-
-        V_right_wheel = w_right*wheel_radius
-        V_left_wheel = w_left*wheel_radius
-
         # Calculate position with Diff. Drive Kinematics
-        
+        if right_ticks != self.right_ticks_past | left_ticks != self.left_ticks_past:
+            # Get difference between tick number to get Angular velocity
+            # Order does matter; signifies direction of rotation (do not use magnitude)
+            right_ticks_diff = right_ticks - self.right_ticks_past
+            left_ticks_diff = left_ticks - self.left_ticks_past
+
+            # Calculate linear wheel velocities:
+            degrees_right = (360/encoder_resolution)*right_ticks_diff
+            degrees_left = (360/encoder_resolution)*left_ticks_diff
+
+            w_right_deg = degrees_right/t #Only with the difference
+            w_left_deg = degrees_left/t #Only with the difference
+
+            w_right = w_right_deg*(np.pi/180) #Only with the difference
+            w_left = w_left_deg*(np.pi/180) #Only with the difference
+
+            # Define Jacobian and angular velocity vector (rad/s)
+            # Angular velocity vector - [phi_dotR; phi_dotL] aka omegaR and omegaL wR wL
+            angular_velocity_vector = np.array([[w_right],[w_left]])
+
+            # Jacobian
+            Ja = np.array([[(wheel_radius/2)*np.cos(self.theta), (wheel_radius/2)*np.cos(self.theta)],
+                        [(wheel_radius/2)*np.sin(self.theta), (wheel_radius/2)*np.sin(self.theta)],
+                        [(wheel_radius/wheel_axel_width), -(wheel_radius/wheel_axel_width)]])
+
+            # Velocity vector - [x_dot; y_dot; theta_dot] - Result
+            velocity_vector = Ja @ angular_velocity_vector
+
+            # Position vector - [x; y; theta] - Result
+            position_vector = t * velocity_vector #TODO VERIFY LOGIC FOR TIME AMOUNT
+            
+            # Update x,y,theta values stored in attributes
+            self.x = self.x + position_vector[0]
+            self.y = self.y + position_vector[1]
+            self.theta = self.theta + position_vector[2]
     
-        #TODO-REMEMBER CALCULATE DIFFERENCE AND ONLY USE DIFFERENCE
+            # Publish and Logger #TODO 
 
-        # Calculate position - only for when wheel ticks change well actually? # TODO-Figure this out
+            # Store values right before next loop/msg - Naturally accumulate, no need to add
+            self.right_ticks_past = right_ticks
+            self.left_ticks_past = left_ticks
 
-        # you get the velocity but umm? uhhh velocity could be well umm? # TODO-Figure this out
-        #if 
-
-        # Verify with values of msg before as to not be same values, since encoder is cummulative #TODO-Figure out math first to see if this is even necesary
-        # If value is same as before (since this publishes on a timer not on input)
-
-        # Store calculated current position in self attribute
+        elif right_ticks == self.right_ticks_past and left_ticks == self.left_ticks_past:
+            #Add to Logger Status and Print Note in terminal #TODO
 
 
-    # SERVER CALLBACK
+        else:
+            #Print error #TODO
+
+
+    # SERVER CALLBACK #TODO FINISH -------
     def server_resetpose_callback(self, request, response):
-        #Execute the service and give response values:
+        # Execute the service and give response values:
         # Take clients request and apply to the self current position attribute #TODO-VERIFY IF CORRECT
         x_new = request.x
         y_new = request.y
         theta_new = request.theta
-        #Apply to current position attribute
-        self.current_position[0] = x_new
-        self.current_position[1] = y_new
-        self.current_position[2] = theta_new
+
+        # Evaluate if Accepted or Not (aka if dfdfdf ) #TODO ask - ASK "WHAT LIMITS MY POSITIONS?, Since it doesnt have to move there, OR DOES IT"********************
+
+        # Depending on if Accepted or Not, if elif of position values - NOT IN ONE STEP
+
 
         # Establish response srv values for the message # TODO-VERIFY IF CORRECT 
-        # Si requested position is actually posible or not
-        response.accepted = dfdf
-        #Current postion, if not accepted, no changes.
-        response.status = f"Requested position: {KK}, Final position: {IKK}"
-# SEE IF THERE IS A PUBLISH OR SIMILAR COMMAND #TODO
+        # Si requested position is actually posible or not #TODO ASK ABOUT THIS
+        if 
+        response.accepted = True
+
+        elif
+        response.accepted = False
+
+        # AFTER ACCEPTED, DO THE POSITION PROCESS #################
+        # Apply to current position attribute (Not Addition; Overlay)
+        self.x = x_new
+        self.y = y_new
+        self.theta = theta_new
+
+        # Current postion, if not accepted, no changes.
+        
+
+        # After evaluations, this is response to terminal? 
+        # #TODO Verify if in terminal Publish to termial or something if not********** ASK
+        response.status = f"Requested position: [{request.x}, {request.y}, {request.theta}], Final position: [{self.x}, {self.y}, {self.theta}]"
+        # SEE IF THERE IS A PUBLISH OR SIMILAR COMMAND #TODO
  
  
                
