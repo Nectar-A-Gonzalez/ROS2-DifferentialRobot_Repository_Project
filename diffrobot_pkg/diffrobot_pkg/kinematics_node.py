@@ -28,7 +28,14 @@ from robot_parameters import wheel_radius, wheel_axel_width, encoder_resolution,
 class KinematicsNode(Node):
     def __init__(self):
         super.__init__('kinematics_node') #name attribute
-        self.current_position = [0,0,0] # TODO - verify if best to make a vector
+        # Create position attributes and initialize at position and angle 0
+        # Robot's current position attribute 
+        self.x = 0
+        self.y = 0
+        self.theta = 0
+        # Initial "past" tick values
+        self.right_ticks_past = 0
+        self.left_ticks_past = 0
 
         # SUBSCRIBER TO /wheel_ticks (left tick amount, right tick amount; cummulative)
         self.subscription = self.create_subscription(WheelTicks, 'wheel_ticks', self.sub_wheelticks_callback, 25) #msg class type,topic name, callback, reserve amount)
@@ -41,7 +48,6 @@ class KinematicsNode(Node):
         # SERVER TO /reset_pose (set pose as a desired on, #assume clear wheel tick amounts)
         self.srv = self.create_service(SetPose,"reset_pose", self.server_resetpose_callback)
         #Uses reset pose srv message type - Remember uses a SERVICE CHANNEL NOT A TOPIC CHANNEL
-
 
 
     # SUBSCRIBER CALLBACK
@@ -72,13 +78,19 @@ class KinematicsNode(Node):
         w_right = w_right_deg*(np.pi/180)
         w_left = w_left_deg*(np.pi/180)
 
-        V_right_wheel = w_right*wheel_radius
-        V_left_wheel = w_left*wheel_radius
+        # V_right_wheel = w_right*wheel_radius
+        # V_left_wheel = w_left*wheel_radius
+
+        
 
         # Calculate position with Diff. Drive Kinematics
         
-    
         #TODO-REMEMBER CALCULATE DIFFERENCE AND ONLY USE DIFFERENCE
+        if 
+
+        elif 
+
+
 
         # Calculate position - only for when wheel ticks change well actually? # TODO-Figure this out
 
@@ -89,6 +101,10 @@ class KinematicsNode(Node):
         # If value is same as before (since this publishes on a timer not on input)
 
         # Store calculated current position in self attribute
+
+        # Publish and Store to logger
+
+        #Store last value for tick in old, for next message
 
 
     # SERVER CALLBACK
