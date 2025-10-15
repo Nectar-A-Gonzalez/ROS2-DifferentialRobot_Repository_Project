@@ -28,7 +28,6 @@ from robot_parameters import wheel_radius, wheel_axel_width, encoder_resolution,
 class KinematicsNode(Node):
     def __init__(self):
         super.__init__('kinematics_node') #name attribute
-        self.current_position = [0,0,0] # TODO - verify if best to make a vector
         # Initial Position Values
         self.x = 0
         self.y = 0
@@ -69,6 +68,7 @@ class KinematicsNode(Node):
         left_ticks = self.WheelTicks_data_instance.left_ticks
 
         # Calculate position with Diff. Drive Kinematics
+        # For change between tick amounts - Robot moved
         if right_ticks != self.right_ticks_past | left_ticks != self.left_ticks_past:
             # Get difference between tick number to get Angular velocity
             # Order does matter; signifies direction of rotation (do not use magnitude)
@@ -104,60 +104,72 @@ class KinematicsNode(Node):
             self.x = self.x + position_vector[0]
             self.y = self.y + position_vector[1]
             self.theta = self.theta + position_vector[2]
+
+            # Write the data to the message 
+            msg.x = self.x
+            msg.y = self.y
+            msg.theta = self.theta
     
-            # Publish and Logger #TODO 
+            # Publish and Logger
+            self.publisher_.publish(msg)
+            self.get_logger().info('Publishing: x:%d, y:%d, theta:%d' % (msg.x, msg.y, msg.theta))
 
             # Store values right before next loop/msg - Naturally accumulate, no need to add
             self.right_ticks_past = right_ticks
             self.left_ticks_past = left_ticks
 
         elif right_ticks == self.right_ticks_past and left_ticks == self.left_ticks_past:
-            #Add to Logger Status and Print Note in terminal #TODO
-
+            # Publish and Logger
+            self.publisher_.publish(msg)
+            self.get_logger().info('Publishing: x:%d, y:%d, theta:%d. No change.' % (msg.x, msg.y, msg.theta))
 
         else:
-            #Print error #TODO
+            self.get_logger().info('Error')
 
 
-    # SERVER CALLBACK #TODO FINISH -------
+    # SERVER CALLBACK #TODO FINISH ------
     def server_resetpose_callback(self, request, response):
-        # Execute the service and give response values:
-        # Take clients request and apply to the self current position attribute #TODO-VERIFY IF CORRECT
-        x_new = request.x
-        y_new = request.y
-        theta_new = request.theta
+    
+        # Evaluate if the requested position can be Accepted or Not (aka if dfdfdf) 
+        # TODO ask - ASK "WHAT LIMITS MY POSITIONS?, Since it doesnt have to move there, OR DOES IT"********************
 
-        # Evaluate if Accepted or Not (aka if dfdfdf ) #TODO ask - ASK "WHAT LIMITS MY POSITIONS?, Since it doesnt have to move there, OR DOES IT"********************
+        # Evaluate if requested position is possible or not:
+        if jmkljk:
+            response.accepted = True
+        else:
+            response.accepted = False
 
-        # Depending on if Accepted or Not, if elif of position values - NOT IN ONE STEP
-
-
-        # Establish response srv values for the message # TODO-VERIFY IF CORRECT 
-        # Si requested position is actually posible or not #TODO ASK ABOUT THIS
-        if 
-        response.accepted = True
-
-        elif
-        response.accepted = False
-
-        # AFTER ACCEPTED, DO THE POSITION PROCESS #################
-        # Apply to current position attribute (Not Addition; Overlay)
-        self.x = x_new
-        self.y = y_new
-        self.theta = theta_new
+        # AFTER ACCEPTED, DO THE POSITION PROCESS#
+        # Different logs for the different situations; if response is accepted or not.
+        if response.accepted:
+            self.x = request.x
+            self.y = request.y
+            self.theta = request.theta
+            response.status = f"Robot is moving or is now set dfdfffdf??" #TODO - ASK ¿IS IT MOVING OR IS IT JUST RESETTING THE COORD PLANE??????
+            self.get_logger().info('DFDFDF')
 
         # Current postion, if not accepted, no changes.
-        
+        elif not response.accepted:
+            response.status = f"Robot is moving or is now set dfdfdfdf??" #TODO - ASK ¿IS IT MOVING OR IS IT JUST RESETTING THE COORD PLANE??????
+            self.get_logger().info('DFDFDF')
 
-        # After evaluations, this is response to terminal? 
+        else:
+            self.get_logger().info('DFDFDFD')
+
+# each evaluation gets a different log
+
+        # After all evaluations, this is response to terminal:
         # #TODO Verify if in terminal Publish to termial or something if not********** ASK
         response.status = f"Requested position: [{request.x}, {request.y}, {request.theta}], Final position: [{self.x}, {self.y}, {self.theta}]"
-        # SEE IF THERE IS A PUBLISH OR SIMILAR COMMAND #TODO
+        
+        # Return the response part of the message when the function is run, with the assigned values
+        return response
  
  
                
 def main(args=None): #Input arguments are set to None (Classtype), arguments for ros2 parameters #TODO-CHECK INFO
     rclpy.init(args=args) #Input arguments are reset to their original values for usage. Just passed along by main()
+
     kinematics_node = KinematicsNode()
     rclpy.spin(kinematics_node)
     kinematics_node.destroy_node()
