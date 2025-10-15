@@ -2,30 +2,31 @@
 These packages are used to model a differential drive robot that communicates via ROS2 - Jazzy Distro.
 The diffrobot_pkg includes the three nodes that are used to simulate the differential robots behavior.
 The behavior is as follows:<br>
-- The robot is given a velocity at which it should move, the encoders are to dfdfderere
-- The encoders read the angular velocity of each wheel in terms of tics read per degree dfdfererer
+- The robot is given a velocity at which it should move, the encoders are simulated through a node, which takes that linear and angular velocity (Vx and wz) and translates it into the amount of ticks the encoder would read, if the velocity is applied for 1 (one) second and the encoder has a resolution of dfddfdfdf (variables defined in the robot_parameters.py, change for your use case).<br>
+- Based on the amount of ticks read by the encoders and if they changed from the previous instance, the new position of the robot is calculated.<br>
+dfdfd
+- The encoders "read" the angular velocity of each wheel in terms of tics read per degree dfdfererer
  
-- #Communicates to what Explain the ros way of communicating or just the data processing aspect, I think only the logical part #IDEA
-- #And maybe give instrutions to how to see ros communication nodes relationships. #IDEA
-
 > [!Note] 
 > The instructions given here are for a Linux OS.
+> They assume ROS2 already installed and sourced in the terminals.
 
+#Communicates to what Explain the ros way of communicating or just the data processing aspect, I think only the logical part #IDEA
+#And maybe give instrutions to how to see ros communication nodes relationships. #IDEA
 
 ## How to build the package in your own workspace:
 To build the package in a workspace, you first need to create your workspace folder (if you don't already have one).<br>
 
-
 ### To create a workspace
 To do that, in a terminal window write:
-#####
-    mkdir -p ros2_ws/src dfdfdfdff
-    dfdf
-    sdsdsd
 
-After creating your workspace, add the necessary workspace folders
+    mkdir -p ~/YOUR-WORKSPACE/src 
+    cd ~/YOUR-WORKSPACE/src
+This creates a folder with the name you decide for your workspace, and creates a folder called `src` inside of it. It then positions you inside the `src` folder, where your packages will be downloaded to; along with any source code you will use in your project. dfdfdfdfdfdfdfdfdf
 
-    dfdfd
+While inside the `src` folder, now clone the repository:
+
+    git clone https://github.com/Nectar-A-Gonzalez/ROS2-DifferentialRobot_Repository_Project
     dfdfdf
     dfdf
 
@@ -51,7 +52,6 @@ dfdfdf<br>
     dfdf
 
 ## Example Outputs Video - Using the test commands
-
 
 
 ### Some References<br>
