@@ -108,3 +108,10 @@ print(f"Multi \n{multi_product}\n" #Element by element NOT Matrix Normal
       f"Dot \n{dot_product}\n" #Matrix multiplication
       f"Aroba \n{aroba_product}\n" #Matrix multiplication
       f"Asterisk * \n{asterisk_product}") #Element by element NOT Matrix normal
+
+#From Kinematics Node
+# Execute the service and give response values:
+        ## Take clients request and apply to the self current position attribute #TODO-VERIFY IF CORRECT
+        #x_new = request.x
+        #y_new = request.y
+        #theta_new = request.theta
