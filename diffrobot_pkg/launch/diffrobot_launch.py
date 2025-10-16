@@ -5,7 +5,7 @@ from launch_ros.actions import Node
 def generate_launch_description():
     return LaunchDescription([
         Node(
-            package='diffrobot_pkd',
+            package='diffrobot_pkg',
             executable='encoder_node',
             name='custom_encoder_node',
             output='screen',
