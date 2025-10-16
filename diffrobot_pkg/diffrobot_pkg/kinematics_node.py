@@ -10,7 +10,7 @@ import rclpy.node as Node
 import numpy as np
 from diffrobot_interfaces.msg import WheelTicks, Pose2DStamped #custom msg from pkg
 from diffrobot_interfaces.srv import SetPose #custom msg and srv message from pkg
-from robot_parameters import wheel_radius, wheel_axel_width, encoder_resolution, t #Robot's configuration
+from .robot_parameters import wheel_radius, wheel_axel_width, encoder_resolution, t #Robot's configuration
 
 # SIMUL Input
 # Wheelticks.msg
