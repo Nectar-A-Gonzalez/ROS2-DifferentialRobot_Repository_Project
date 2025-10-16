@@ -5,10 +5,18 @@ from launch_ros.actions import Node
 def generate_launch_description():
     return LaunchDescription([
         Node(
-            package=''
-            executable=''
-            name=''
-            
-        )
-
+            package='diffrobot_pkd',
+            executable='encoder_node',
+            name='custom_encoder_node',
+            output='screen',
+            emulate_tty=True,
+        ),
+        Node(
+            package='diffrobot_pkd',
+            executable='kinematics_node',
+            name='custom_kinematics_node',
+            output='screen',
+            emulate_tty=True,
+        ),
     ])
+#TODO Unsure if it needs to also run reset client?

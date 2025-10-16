@@ -153,8 +153,6 @@ class KinematicsNode(Node):
 
         # Return the response part of the message when the function is run, with the assigned values
         return response
- 
- 
                
 def main(args=None): #Input arguments are set to None (Classtype), arguments for ros2 parameters
     rclpy.init(args=args) #Input arguments are reset to their original values for usage. Just passed along by main()
