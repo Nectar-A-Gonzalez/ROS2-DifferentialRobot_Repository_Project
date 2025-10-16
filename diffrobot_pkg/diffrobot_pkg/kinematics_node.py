@@ -27,7 +27,7 @@ from robot_parameters import wheel_radius, wheel_axel_width, encoder_resolution,
 
 class KinematicsNode(Node):
     def __init__(self):
-        super.__init__('kinematics_node') #name attribute
+        super().__init__('kinematics_node') #name attribute
         # Initial Position Values
         self.x = 0
         self.y = 0

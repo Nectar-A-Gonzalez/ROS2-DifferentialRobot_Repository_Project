@@ -33,7 +33,7 @@ from .robot_parameters import wheel_radius, wheel_axel_width, encoder_resolution
 
 class EncoderNode(Node): 
     def __init__(self):
-        super.__init__("encoder_node") #name attribute
+        super().__init__("encoder_node") #name attribute
         # SUBSCRIBER TO /cmd_vel TOPIC - (Gets Vx and Wz)
         self.subscription = self.create_subscription(Twist, 'cmd_vel', self.sub_cmdvel_callback, 25) #msg class type,topic name, callback, reserve amount)
         self.subscription # recommended to prevent unused variable warning
