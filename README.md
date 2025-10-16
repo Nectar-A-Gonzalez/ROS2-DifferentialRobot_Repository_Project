@@ -32,6 +32,8 @@ While inside the `src` folder, clone this repository to the folder:
 
     git clone https://github.com/Nectar-A-Gonzalez/ROS2-DifferentialRobot_Repository_Project
 
+Here the diffrobot_pkg hold the dfdfdffdf code, while diffrobot_interfaces holds the necessary msg and srv templates for ROS2 communication.
+
 ### Resolve Dependencies
 Before we can _build_ the workspace, we need to check if all the required package dependencies are installed.<br>
 Go to the root of your workspace
@@ -54,14 +56,10 @@ From the root of your workspace, run:
     # Summary: 2 package finished [###]
 
 ## How to source and run the package
-Finally, add the DiffRobot packages (diffrobot_pkg and diffrobot_interfaces).
-
-Here the diffrobot_pkg hold the dfdfdffdf code, while diffrobot_interfaces holds the necessary msg and srv templates for ROS2 communication.
+To be able to access the executables that were just built, from our terminal, we need to source
 
     dfdfd
     dfdf
-    dfdfd
-    dfff
 
 ## Commands to test the pub/sub and service/client communications:
 sdsdsdsd<br>
@@ -90,7 +88,19 @@ dfdfdf<br>
 
 2) Launch stack (encoder + kinematics)
 
-    ros2 launch diffrobot_pkg 
+    ros2 launch diffrobot_pkg diffrobot_launch.py
+
+3) 
+
+4) 
+
+5) 
+
+6) 
+
+7) 
+
+8) 
 
 ## Example Outputs Video - Using the test commands
 
