@@ -55,7 +55,7 @@ class KinematicsNode(Node):
         self.get_logger().info(
             f"The robot's wheels have rotated:" 
             f"left wheel: {msg.left_ticks} ticks, right wheel:{msg.right_ticks} ticks.") #Same as Encoder's publisher
-        self.WheelTicks_data_instance = msg #Stores the recieved msg # TODO-Maybe move all the loggers after code part??
+        self.WheelTicks_data_instance = msg #Stores the recieved msg
 
 
     # PUBLISHER CALLBACK
@@ -121,53 +121,42 @@ class KinematicsNode(Node):
         elif right_ticks == self.right_ticks_past and left_ticks == self.left_ticks_past:
             # Publish and Logger
             self.publisher_.publish(msg)
-            self.get_logger().info('Publishing: x:%d, y:%d, theta:%d. No change.' % (msg.x, msg.y, msg.theta))
+            self.get_logger().info('Publishing: x:%d, y:%d, theta:%d. No change.' % (msg.x, msg.y, msg.theta)) 
 
         else:
             self.get_logger().info('Error')
 
 
-    # SERVER CALLBACK #TODO FINISH ------
+    # SERVER CALLBACK
     def server_resetpose_callback(self, request, response):
-    
-        # Evaluate if the requested position can be Accepted or Not (aka if dfdfdf) 
-        # TODO ask - ASK "WHAT LIMITS MY POSITIONS?, Since it doesnt have to move there, OR DOES IT"********************
+        # Evaluate if the requested position can be Accepted or Not - NOT NECESSARY IN THIS CASE
+        response.accepted = True
 
-        # Evaluate if requested position is possible or not:
-        if jmkljk:
-            response.accepted = True
-        else:
-            response.accepted = False
-
-        # AFTER ACCEPTED, DO THE POSITION PROCESS#
+        # After accepted or rejected, Position Process:
         # Different logs for the different situations; if response is accepted or not.
         if response.accepted:
             self.x = request.x
             self.y = request.y
             self.theta = request.theta
-            response.status = f"Robot is moving or is now set dfdfffdf??" #TODO - ASK ¿IS IT MOVING OR IS IT JUST RESETTING THE COORD PLANE??????
-            self.get_logger().info('DFDFDF')
+            response.status = f"Current set position: [x:{self.x}, y:{self.y} ,theta:{self.theta}]" #TODO-IS THIS EVEN SEEN OR JUST REPLACED AND NOT EVEN SEEN??
+            self.get_logger().info('Incoming request\n[x:%d, y:%d, theta:%d]' % (request.x, request.y, request.theta)) 
+            #TODO - ASK - Can the other method be used? Fstring?
 
-        # Current postion, if not accepted, no changes.
+        # Current postion, if not accepted, no changes:
         elif not response.accepted:
-            response.status = f"Robot is moving or is now set dfdfdfdf??" #TODO - ASK ¿IS IT MOVING OR IS IT JUST RESETTING THE COORD PLANE??????
-            self.get_logger().info('DFDFDF')
+            response.status = f"Current set position: [x:{self.x}, y:{self.y}, theta:{self.theta}]" 
+            self.get_logger().info('Robot was not able to be reset. Request was NOT accepted')
 
         else:
-            self.get_logger().info('DFDFDFD')
+            response.status = f"Current set position: [x:{self.x}, y:{self.y}, theta:{self.theta}]" 
+            self.get_logger().info('Robot was not able to be reset. Error.')
 
-# each evaluation gets a different log
-
-        # After all evaluations, this is response to terminal:
-        # #TODO Verify if in terminal Publish to termial or something if not********** ASK
-        response.status = f"Requested position: [{request.x}, {request.y}, {request.theta}], Final position: [{self.x}, {self.y}, {self.theta}]"
-        
         # Return the response part of the message when the function is run, with the assigned values
         return response
  
  
                
-def main(args=None): #Input arguments are set to None (Classtype), arguments for ros2 parameters #TODO-CHECK INFO
+def main(args=None): #Input arguments are set to None (Classtype), arguments for ros2 parameters
     rclpy.init(args=args) #Input arguments are reset to their original values for usage. Just passed along by main()
 
     kinematics_node = KinematicsNode()
