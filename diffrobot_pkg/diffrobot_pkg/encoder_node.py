@@ -73,7 +73,7 @@ class EncoderNode(Node):
         w_left_deg = w_left * (180/np.pi)
 
         # Divide by time the angular velocity is applied to get the degrees the wheel turned
-        degrees_right = w_right_deg*t # TODO-VERIFY CORRECTION (from w/t to w*t)
+        degrees_right = w_right_deg*t # TODO-VERIFY (from w/t to w*t)
         degrees_left = w_left_deg*t
 
         # Calculate the ticks the encoder has/should count - CUMULATIVE AMOUNTS 
