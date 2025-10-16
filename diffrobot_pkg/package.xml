@@ -8,10 +8,8 @@
   <license>Apache-2.0</license>
 
   <exec_depend>rclpy</exec_depend>
-  <exec_depend>numpy</exec_depend>
   <exec_depend>geometry_msgs</exec_depend>
   <exec_depend>diffrobot_interfaces</exec_depend>
-  <exec_depend>robot_parameters</exec_depend>
   
 
   <test_depend>ament_copyright</test_depend>

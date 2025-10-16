@@ -58,6 +58,11 @@ Finally, add the DiffRobot packages (diffrobot_pkg and diffrobot_interfaces).
 
 Here the diffrobot_pkg hold the dfdfdffdf code, while diffrobot_interfaces holds the necessary msg and srv templates for ROS2 communication.
 
+    dfdfd
+    dfdf
+    dfdfd
+    dfff
+
 ## Commands to test the pub/sub and service/client communications:
 sdsdsdsd<br>
 
