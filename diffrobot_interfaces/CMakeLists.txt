@@ -14,7 +14,7 @@ find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/Pose2DStamped.msg"
-  "msg/Wheelticks.msg"
+  "msg/WheelTicks.msg"
   "srv/SetPose.srv"
   DEPENDENCIES builtin_interfaces # Add packages that above messages depend on, in this case geometry_msgs for Sphere.msg
 ) 
