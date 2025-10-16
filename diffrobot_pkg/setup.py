@@ -23,9 +23,9 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [ 
-            'kinematics_node = diffrobot_pkg.kinematics_node:main'
-            'encoder_node = diffrobot_pkg.encoder_node:main'
-            'reset_client = diffrobot_pkg.reset_client:main'
+            'kinematics_node = diffrobot_pkg.kinematics_node:main',
+            'encoder_node = diffrobot_pkg.encoder_node:main',
+            'reset_client = diffrobot_pkg.reset_client:main',
         ],
     },
 )
