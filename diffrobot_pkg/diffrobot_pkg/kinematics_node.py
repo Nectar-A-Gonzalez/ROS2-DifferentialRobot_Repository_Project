@@ -6,7 +6,7 @@
 # - Offers service /reset_pose (type SetPose.srv) to set the internal pose to given (x, y, theta).
 
 import rclpy
-import rclpy.Node as Node
+import rclpy.node as Node
 import numpy as np
 from diffrobot_interfaces.msg import WheelTicks, Pose #custom msg from pkg
 from diffrobot_interfaces.srv import Pose2DStamped, SetPose #custom msg and srv message from pkg
