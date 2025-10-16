@@ -115,3 +115,11 @@ print(f"Multi \n{multi_product}\n" #Element by element NOT Matrix Normal
         #x_new = request.x
         #y_new = request.y
         #theta_new = request.theta
+
+#From Kinematics Node
+        #if:
+        #else:
+        #   response.accepted = False
+        
+#From Kinematics Node
+#response.status = f"Requested position: [{request.x}, {request.y}, {request.theta}], Final position: [{self.x}, {self.y}, {self.theta}]"
