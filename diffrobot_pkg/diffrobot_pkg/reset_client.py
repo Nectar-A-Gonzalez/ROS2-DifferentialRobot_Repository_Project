@@ -13,9 +13,9 @@ class ResetClient(Node):
         super.__init__("reset_client")
         self.cli = self.create_client(SetPose, 'reset_pose') # srv type, srv comm channel name, have to match
 
-        #~?? Time it will wait for, and if this function doesnt come back true aka the service is not active/available, it will keep in this loop.. waiting
+        #Time it will wait for, and if this function doesn't come back true aka the service is not active/available, it will keep in this loop.. waiting
         while not self.cli.wait_for_service(timeout_sec=1.0):
-            self.get_logger().info('service not available, waiting again...') #Stores in logger, not print TODO VERIFY
+            self.get_logger().info('service not available, waiting again...')
         
         # Makes object of the request section, After service is confirmed available
         self.request = SetPose.Request()
@@ -44,9 +44,9 @@ def main(args=None):
                     'Service call failed %r' %(e,))
             else:
                 reset_client.get_logger().info(
-                    'Result of result client: Requested position [x:%d, y:%d, theta:%d]; Request has been accepted: %d; Status of the Robot: %d' %
+                    'Result of reset_client: Requested position [x:%d, y:%d, theta:%d]; Request has been accepted: %d; Status of the Robot: %d' %
                     (reset_client.request.x, reset_client.request.y, reset_client.request.theta, response.accepted, response.status)
-                    
+
                     #Use values of srv not actual for x,y,theta for node
                     # Need to give value to status in the server and the accepted also, 
                     # Just put the pure response variables as info for the logger
