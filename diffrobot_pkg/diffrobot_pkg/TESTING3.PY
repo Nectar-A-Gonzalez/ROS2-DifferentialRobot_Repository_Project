@@ -7,3 +7,4 @@ def ddr_fk(phidot_L, phidot_R, L=0.5, r=0.1):
 
 phidot_L, phidot_R = ddr_ik(v_x=0.2, omega=0.3)
 print(phidot_L, phidot_R)
+# DOES THIS UPDATE
