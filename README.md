@@ -8,8 +8,9 @@ dfdfd
 - The encoders "read" the angular velocity of each wheel in terms of tics read per degree dfdfererer
  
 > [!Note] 
-> The instructions given here are for a Linux OS.
-> They assume ROS2 already installed and sourced in the terminals.
+> The instructions given here are for a Linux OS.<br>
+> Package is for ROS2 - Jazzy <br>
+> They assume ROS2 already installed and sourced in the terminals.<br>
 
 #Communicates to what Explain the ros way of communicating or just the data processing aspect, I think only the logical part #IDEA
 #And maybe give instrutions to how to see ros communication nodes relationships. #IDEA
@@ -17,28 +18,52 @@ dfdfd
 ## How to build the package in your own workspace:
 To build the package in a workspace, you first need to create your workspace folder (if you don't already have one).<br>
 
-### To create a workspace
+### Create a workspace
 To do that, in a terminal window write:
 
     mkdir -p ~/YOUR-WORKSPACE/src 
     cd ~/YOUR-WORKSPACE/src
-This creates a folder with the name you decide for your workspace, and creates a folder called `src` inside of it. It then positions you inside the `src` folder, where your packages will be downloaded to; along with any source code you will use in your project. dfdfdfdfdfdfdfdfdf
 
-While inside the `src` folder, now clone the repository:
+This creates a folder with the name you decide for your workspace, and creates a folder called `src` inside of it.<br>
+It then positions you inside the `src` folder, where your packages will be downloaded to; along with any source code you will use in your project.
+
+### Download the packages
+While inside the `src` folder, clone this repository to the folder:
 
     git clone https://github.com/Nectar-A-Gonzalez/ROS2-DifferentialRobot_Repository_Project
-    dfdfdf
-    dfdf
 
+### Resolve Dependencies
+Before we can _build_ the workspace, we need to check if all the required package dependencies are installed.<br>
+Go to the root of your workspace
+    
+    cd ~/YOUR-WORKSPACE/
+
+Check the dependencies:
+
+    rosdep install -i --from-path src --rosdistro jazzy -y
+    # Output: All required rosdeps installed sucessfully
+
+### Build the workspace
+Finally, we can build the workspace
+From the root of your workspace, run:
+    
+    colcon build
+    # Output:
+    # Starting >>> ####
+    # Finished <<< #### [###]
+    # Summary: 2 package finished [###]
+
+## How to source and run the package
 Finally, add the DiffRobot packages (diffrobot_pkg and diffrobot_interfaces).
-
-    dfdf
 
 Here the diffrobot_pkg hold the dfdfdffdf code, while diffrobot_interfaces holds the necessary msg and srv templates for ROS2 communication.
 
-
 ## Commands to test the pub/sub and service/client communications:
 sdsdsdsd<br>
+
+Verify 
+
+
 
 To simulate a commanding velocity input, dfdf<br>
 
@@ -50,6 +75,17 @@ dfdfdf<br>
 
     df
     dfdf
+
+## Required Verification
+1) Interfaces exist and are introspectable<br>
+
+    ros2 interface show diffrobot_interfaces/msg/Wheelticks
+    ros2 interface show diffrobot_interfaces/msg/Pose2DStamped
+    ros2 interface show diffrobot_interfaces/srv/SetPose
+
+2) Launch stack (encoder + kinematics)
+
+    ros2 launch diffrobot_pkg 
 
 ## Example Outputs Video - Using the test commands
 
