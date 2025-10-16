@@ -12,7 +12,7 @@ def generate_launch_description():
             emulate_tty=True,
         ),
         Node(
-            package='diffrobot_pkd',
+            package='diffrobot_pkg',
             executable='kinematics_node',
             name='custom_kinematics_node',
             output='screen',
