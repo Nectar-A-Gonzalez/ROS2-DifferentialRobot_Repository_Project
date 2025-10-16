@@ -15,15 +15,14 @@ setup(
     zip_safe=True,
     maintainer='Nectar A. Gonzalez Negron',
     maintainer_email='nectargonzalez@outlook.com',
-    description='TODO: Package description',
+    description='Differential drive robot simulation ROS2 ',
     license='Apache-2.0',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [ 
-            'kinematics_node'
-            'encoder_node'
-            'reset_client'
-            #TODO - ADD ENTRY POINTS FOR EXECUTABLES
+            'kinematics_node = diffrobot_pkg.kinematics_node:main'
+            'encoder_node = diffrobot_pkg.encoder_node:main'
+            'reset_client = diffrobot_pkg.reset_client:main'
         ],
     },
 )
