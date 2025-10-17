@@ -48,6 +48,8 @@ class KinematicsNode(Node):
         self.srv = self.create_service(SetPose,"reset_pose", self.server_resetpose_callback)
         #Uses reset pose srv message type - Remember uses a SERVICE CHANNEL NOT A TOPIC CHANNEL
 
+        self.WheelTicks_data_instance = None
+
 
     # SUBSCRIBER CALLBACK
     def sub_wheelticks_callback(self, msg:WheelTicks):
