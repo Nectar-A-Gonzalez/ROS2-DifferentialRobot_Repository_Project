@@ -7,10 +7,12 @@
 
 import rclpy
 from rclpy.node import Node
+from builtin_interfaces.msg import Time #Msg template need to import from ROS2
 import numpy as np
 from diffrobot_interfaces.msg import WheelTicks, Pose2DStamped #custom msg from pkg
 from diffrobot_interfaces.srv import SetPose #custom msg and srv message from pkg
 from .robot_parameters import wheel_radius, wheel_axel_width, encoder_resolution, t #Robot's configuration
+
 
 # SIMUL Input
 # Wheelticks.msg
@@ -48,7 +50,16 @@ class KinematicsNode(Node):
         self.srv = self.create_service(SetPose,"reset_pose", self.server_resetpose_callback)
         #Uses reset pose srv message type - Remember uses a SERVICE CHANNEL NOT A TOPIC CHANNEL
 
-        self.WheelTicks_data_instance = None # TODO = VERIFY
+        # Add placeholder values, so that the callback can run before data has been yet published;
+        # if not, the terminal decided not to run the code. Since the Timer starts running inmediatly
+        
+        # Create a WheelTicks object since it needs to exist, since you reference it 
+        # in the publisher callback, which runs on each time interval
+        # and the sub only runs after a msg has been published to its topic
+        self.WheelTicks_data_instance = WheelTicks()
+        self.WheelTicks_data_instance.right_ticks = 0
+        self.WheelTicks_data_instance.left_ticks = 0
+        self.WheelTicks_data_instance.stamp = 0
 
 
     # SUBSCRIBER CALLBACK
@@ -57,8 +68,10 @@ class KinematicsNode(Node):
         self.get_logger().info(
             f"The robot's wheels have rotated:" 
             f"left wheel: {msg.left_ticks} ticks, right wheel:{msg.right_ticks} ticks.") #Same as Encoder's publisher
+        
         self.WheelTicks_data_instance = msg #Stores the recieved msg
-
+        #T his just reads what is is published to the topic, 
+        # there is where the time is defined 
 
     # PUBLISHER CALLBACK
     def pub_pose_callback(self):
@@ -71,7 +84,7 @@ class KinematicsNode(Node):
 
         # Calculate position with Diff. Drive Kinematics
         # For change between tick amounts - Robot moved
-        if right_ticks != self.right_ticks_past | left_ticks != self.left_ticks_past:
+        if right_ticks != self.right_ticks_past or left_ticks != self.left_ticks_past:
             # Get difference between tick number to get Angular velocity
             # Order does matter; signifies direction of rotation (do not use magnitude)
             right_ticks_diff = right_ticks - self.right_ticks_past
@@ -111,22 +124,25 @@ class KinematicsNode(Node):
             msg.x = self.x
             msg.y = self.y
             msg.theta = self.theta
+            msg.stamp = self.get_clock().now.to_msg() 
     
             # Publish and Logger
             self.publisher_.publish(msg)
             self.get_logger().info('Publishing: x:%d, y:%d, theta:%d' % (msg.x, msg.y, msg.theta))
 
-            # Store values right before next loop/msg - Naturally accumulate, no need to add
-            self.right_ticks_past = right_ticks
-            self.left_ticks_past = left_ticks
-
         elif right_ticks == self.right_ticks_past and left_ticks == self.left_ticks_past:
+            msg.stamp = self.get_clock().now.to_msg() 
             # Publish and Logger
             self.publisher_.publish(msg)
             self.get_logger().info('Publishing: x:%d, y:%d, theta:%d. No change.' % (msg.x, msg.y, msg.theta)) 
 
         else:
+            msg.stamp = self.get_clock().now.to_msg()
             self.get_logger().info('Error')
+
+        # Store values right before next loop/msg - Naturally accumulate, no need to add
+        self.right_ticks_past = right_ticks
+        self.left_ticks_past = left_ticks
 
 
     # SERVER CALLBACK
