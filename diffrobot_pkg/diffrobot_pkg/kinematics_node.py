@@ -59,8 +59,9 @@ class KinematicsNode(Node):
         self.WheelTicks_data_instance = WheelTicks()
         self.WheelTicks_data_instance.right_ticks = 0
         self.WheelTicks_data_instance.left_ticks = 0
-        self.WheelTicks_data_instance.stamp = 0
-
+        self.WheelTicks_data_instance.stamp = Time()
+        self.WheelTicks_data_instance.stamp.sec = 0
+        self.WheelTicks_data_instance.stamp.nanosec = 0
 
     # SUBSCRIBER CALLBACK
     def sub_wheelticks_callback(self, msg:WheelTicks):
