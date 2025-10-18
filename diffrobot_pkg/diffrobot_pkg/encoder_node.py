@@ -7,6 +7,7 @@
 
 import rclpy #I assume rclpy is part of base ROS2 installation and that is why it is accesable and do not have to do pip
 from rclpy.node import Node
+from builtin_interfaces.msg import Time #Msg template need to import from ROS2
 import numpy as np
 from geometry_msgs.msg import Twist #base ros2 installation
 from diffrobot_interfaces.msg import WheelTicks #custom msg from pkg
@@ -44,6 +45,14 @@ class EncoderNode(Node):
         timer_period = 0.05 #seconds #time interval it will publish/run the callback at #Publish 20Hz -> publish each 0.05 seconds
         self.pub_timer = self.create_timer(timer_period, self.pub_wheelticks_callback)    
 
+        # TODO-VERIFY
+        # Create msg Twist object initialized for 0 so that
+        # even if there has not been data published yet to the cmd_vel channel,
+        # it will be able to run
+        self.Twist_data_instance = Twist()
+        self.Twist_data_instance.linear = [0,0,0]
+        self.Twist_data_instance.angular = [0,0,0]
+
     
     def sub_cmdvel_callback(self,msg:Twist):
         # Runs everytime it recieves a msg through /cmd_vel topic
@@ -80,6 +89,9 @@ class EncoderNode(Node):
         # Also pass values to msg attributes in one go
         msg.right_ticks = (encoder_resolution/360)*degrees_right #Pulses per rotation/360 * degrees wheel rotated due to speed
         msg.left_ticks = (encoder_resolution/360)*degrees_left
+
+        # Get time for when publishing the ticks messages
+        msg.stamp = self.get_clock().now.to_msg() 
 
         # Publish msg data established to topic
         self.publisher_.publish(msg)
