@@ -125,7 +125,7 @@ class KinematicsNode(Node):
             msg.x = self.x
             msg.y = self.y
             msg.theta = self.theta
-            msg.stamp = self.get_clock().now.to_msg() 
+            msg.stamp = self.get_clock().now.to_msg() #TODO-VERIFY
     
             # Publish and Logger
             self.publisher_.publish(msg)
