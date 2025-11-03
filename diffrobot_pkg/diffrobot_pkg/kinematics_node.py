@@ -125,20 +125,20 @@ class KinematicsNode(Node):
             msg.x = self.x
             msg.y = self.y
             msg.theta = self.theta
-            msg.stamp = self.get_clock().now.to_msg() #TODO-VERIFY
+            msg.stamp = self.get_clock().now().to_msg() #TODO-VERIFY
     
             # Publish and Logger
             self.publisher_.publish(msg)
             self.get_logger().info('Publishing: x:%d, y:%d, theta:%d' % (msg.x, msg.y, msg.theta))
 
         elif right_ticks == self.right_ticks_past and left_ticks == self.left_ticks_past:
-            msg.stamp = self.get_clock().now.to_msg() 
+            msg.stamp = self.get_clock().now().to_msg() 
             # Publish and Logger
             self.publisher_.publish(msg)
             self.get_logger().info('Publishing: x:%d, y:%d, theta:%d. No change.' % (msg.x, msg.y, msg.theta)) 
 
         else:
-            msg.stamp = self.get_clock().now.to_msg()
+            msg.stamp = self.get_clock().now().to_msg()
             self.get_logger().info('Error')
 
         # Store values right before next loop/msg - Naturally accumulate, no need to add

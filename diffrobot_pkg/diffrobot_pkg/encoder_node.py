@@ -91,7 +91,7 @@ class EncoderNode(Node):
         msg.left_ticks = (encoder_resolution/360)*degrees_left
 
         # Get time for when publishing the ticks messages
-        msg.stamp = self.get_clock().now.to_msg() 
+        msg.stamp = self.get_clock().now().to_msg() 
 
         # Publish msg data established to topic
         self.publisher_.publish(msg)
