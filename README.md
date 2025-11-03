@@ -56,9 +56,10 @@ From the root of your workspace, run:
     # Summary: 2 package finished [###]
 
 ## How to source and run the package
-To be able to access the executables that were just built, from our terminal, we need to source
+To be able to access the executables that were just built in our current terminal, we need to source them:
 
     dfdfd
+    source install/setup.bash
     dfdf
 
 ## Commands to test the pub/sub and service/client communications:
