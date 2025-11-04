@@ -145,6 +145,9 @@ class KinematicsNode(Node):
         self.right_ticks_past = right_ticks
         self.left_ticks_past = left_ticks
 
+        #This only makes sense if I am adding each iterantion of the wheel ticks, #TODO VERIFY
+        #because it could move same amount between velocities and not be in the same position SINCE IT DID MOVE
+
 
     # SERVER CALLBACK
     def server_resetpose_callback(self, request, response):
