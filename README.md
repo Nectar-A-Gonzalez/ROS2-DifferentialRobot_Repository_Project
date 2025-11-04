@@ -91,17 +91,35 @@ dfdfdf<br>
 
     ros2 launch diffrobot_pkg diffrobot_launch.py
 
-3) 
+3) Topics appear and produce data
 
-4) 
+    ros2 topic list | grep -E '^/wheel_ticks$|^/pose$'
+    ros2 topic echo /wheel_ticks --once
+    ros2 topic echo /pose --once
 
-5) 
+4) (Since it does not have an auto-publishing cmd-vel) Publish a test velocity for at least 3 seconds
+    #In another terminal (after sourcing):
 
-6) 
+    ros2 topic pub /cmd_vel geometry_msgs/Twist "{linear: {x: 0.2, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}" -r 10
 
-7) 
+5) Verify pose changes over time (run twice a few seconds apart)
 
-8) 
+    ros2 topic echo /pose --once
+    sleep 2
+    ros2 topic echo /pose --once
+
+6) Service exists with correct type
+
+    ros2 service type /reset_pose
+    # Expected output: diffrobot_pkg/srv/SetPose
+
+7) Call service directly via CLI
+
+    ros2 service call /reset_pose diffrobot_pkg/srv/SetPose "{x: 1.0, y: 0.0, theta: 1.57}"
+
+8) Call service using your client node
+
+    ros2 run diffrobot_pkg reset_client -- --x 0.0 --y 0.0 --theta 0.0 #THIS SEEMS WEIRD BTW
 
 ## Example Outputs Video - Using the test commands
 
@@ -118,3 +136,4 @@ git pull
 
 Vector variables are lists, so to get x, y, z, you need to use list indexing NOT atribute indexing or maybe you do? but x directly?
 TODO - VERIFY THERE IS NO OTHER WAY If you make it a list IT WONT WORK #Needs to be assigned INDIVIDUALLY
+git pull https://github.com/Nectar-A-Gonzalez/ROS2-DifferentialRobot_Repository_Project.git
