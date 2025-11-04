@@ -57,10 +57,10 @@ class EncoderNode(Node):
         self.Twist_data_instance.angular.x = 0
         self.Twist_data_instance.angular.y = 0
         self.Twist_data_instance.angular.z = 0
-        #TODO - Verify there is no way to set this initial values with array variables just to check for efficiency's sake RESEARCH
-        #TODO - verify if this initiation is NOT messing up the msg value that is being published
+        #TODO (NOTE)- Verify there is no way to set this initial values with array variables just to check for efficiency's sake RESEARCH
+        #TODO (NOTE)- verify if this initiation is NOT messing up the msg value that is being published
         
-        # Initialize wheel tick values and storing location #CHANGE THAT SOULD BE VERIFIED TODO TODO TODO
+        # Initialize wheel tick values and storing location # CHANGE THAT SOULD BE VERIFIED TODO TODO TODO
         self.left_ticks_total = 0
         self.right_ticks_total = 0
 
@@ -97,7 +97,7 @@ class EncoderNode(Node):
         degrees_left = w_left_deg*t
 
         # Calculate the ticks the encoder has/should count - CUMULATIVE AMOUNTS 
-        # Store and add values to the attributes, since must be cummulative - These have to be ints due to ROS2 msg management -TODO-TODO Research More about that
+        # Store and add values to the attributes, since must be cummulative - These have to be ints due to ROS2 msg management -TODO (NOTE) Research More about that
         self.right_ticks_total += int((encoder_resolution/360)*degrees_right) #Pulses per rotation/360 * degrees wheel rotated due to speed
         self.left_ticks_total += int((encoder_resolution/360)*degrees_left)
 
