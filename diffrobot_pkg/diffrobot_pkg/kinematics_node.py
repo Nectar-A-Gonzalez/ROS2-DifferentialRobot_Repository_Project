@@ -59,6 +59,7 @@ class KinematicsNode(Node):
         self.WheelTicks_data_instance = WheelTicks()
         self.WheelTicks_data_instance.right_ticks = 0
         self.WheelTicks_data_instance.left_ticks = 0
+
         self.WheelTicks_data_instance.stamp = Time()
         self.WheelTicks_data_instance.stamp.sec = 0
         self.WheelTicks_data_instance.stamp.nanosec = 0
@@ -162,7 +163,10 @@ class KinematicsNode(Node):
             self.theta = request.theta
             response.status = f"Current set position: [x:{self.x}, y:{self.y} ,theta:{self.theta}]" #TODO-IS THIS EVEN SEEN OR JUST REPLACED AND NOT EVEN SEEN??
             self.get_logger().info('Incoming request\n[x:%d, y:%d, theta:%d]' % (request.x, request.y, request.theta)) 
-            #TODO - ASK - Can the other method be used? Fstring?
+            #TODO - ASK - Can the other method be used? Fstring? RESEARCH NOTE
+            #NOTE - it might not be necessary to reset encoder, since it only takes change between encoder betwen messages to calcualte new position
+            # and if the initial position is now the set one, it should change by the amount it moves 
+
 
         # Current postion, if not accepted, no changes:
         elif not response.accepted:
