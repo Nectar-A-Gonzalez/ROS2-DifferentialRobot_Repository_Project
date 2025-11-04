@@ -67,7 +67,7 @@ class EncoderNode(Node):
     
     def sub_cmdvel_callback(self,msg:Twist):
         # Runs everytime it recieves a msg through /cmd_vel topic
-        self.get_logger().info(f'The robot currently travels:{msg.linear.x} m/s and {msg.angular.z}rad/s')
+        self.get_logger().info(f'The robot currently travels at: {msg.linear.x} m/s; {msg.angular.z} rad/s')
         # Stored message into attribute so they are accesible for the publisher # Attribute created at method run
         self.Twist_data_instance = msg #The initial values are overwritten 
 
@@ -112,8 +112,8 @@ class EncoderNode(Node):
         self.publisher_.publish(msg)
         # Store msg data in Node's logger - Made one line just in case it doesnot support multiline logs
         self.get_logger().info(
-            f"The robot's wheels have rotated:" 
-            f"left wheel: {msg.left_ticks} ticks, right wheel:{msg.right_ticks} ticks.")
+            f"The robot's wheels have rotated: " 
+            f"left wheel: {msg.left_ticks} ticks; right wheel: {msg.right_ticks} ticks.")
         
 # TODO - VERIFY IF TICK COUNT IS DONE CORRECTLY, BEING SUMMED
 

@@ -44,7 +44,7 @@ def main(args=None):
                     'Service call failed %r' %(e,))
             else:
                 reset_client.get_logger().info(
-                    'Result of reset_client: Requested position [x:%d, y:%d, theta:%d]; Request has been accepted: %d; Status of the Robot: %d' %
+                    'Result of reset_client: Requested position [x:%d, y:%d, theta:%d]; Request has been accepted?: %d; Status of the Robot: %d' %
                     (reset_client.request.x, reset_client.request.y, reset_client.request.theta, response.accepted, response.status)
 
                     #Use values of srv not actual for x,y,theta for node

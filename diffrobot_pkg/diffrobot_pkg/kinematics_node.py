@@ -68,9 +68,10 @@ class KinematicsNode(Node):
     def sub_wheelticks_callback(self, msg:WheelTicks):
         # Runs everytime it recieves a msg through /wheel_ticks topic
         self.get_logger().info(
-            f"The robot's wheels have rotated:" 
-            f"left wheel: {msg.left_ticks} ticks, right wheel:{msg.right_ticks} ticks.") #Same as Encoder's publisher
-        
+            f"The robot's wheels have rotated: " 
+            f"left wheel: {msg.left_ticks} ticks; right wheel: {msg.right_ticks} ticks") #Same as Encoder's publisher
+        #Logger is seen in terminal
+
         self.WheelTicks_data_instance = msg #Stores the recieved msg
         #T his just reads what is is published to the topic, 
         # there is where the time is defined 
@@ -136,7 +137,7 @@ class KinematicsNode(Node):
             msg.stamp = self.get_clock().now().to_msg() 
             # Publish and Logger
             self.publisher_.publish(msg)
-            self.get_logger().info('Publishing: x:%d, y:%d, theta:%d. No change.' % (msg.x, msg.y, msg.theta)) 
+            self.get_logger().info('Publishing: x:%d, y:%d, theta:%d [NO CHANGE]' % (msg.x, msg.y, msg.theta)) 
 
         else:
             msg.stamp = self.get_clock().now().to_msg()
@@ -161,8 +162,8 @@ class KinematicsNode(Node):
             self.x = request.x
             self.y = request.y
             self.theta = request.theta
-            response.status = f"Current set position: [x:{self.x}, y:{self.y} ,theta:{self.theta}]" #TODO-IS THIS EVEN SEEN OR JUST REPLACED AND NOT EVEN SEEN??
-            self.get_logger().info('Incoming request\n[x:%d, y:%d, theta:%d]' % (request.x, request.y, request.theta)) 
+            response.status = f"Current set position: [x:{self.x}, y:{self.y}, theta:{self.theta}]" #TODO-IS THIS EVEN SEEN OR JUST REPLACED AND NOT EVEN SEEN??
+            self.get_logger().info('Incoming request: [x:%d, y:%d, theta:%d]' % (request.x, request.y, request.theta)) 
             #TODO - ASK - Can the other method be used? Fstring? RESEARCH NOTE
             #NOTE - it might not be necessary to reset encoder, since it only takes change between encoder betwen messages to calcualte new position
             # and if the initial position is now the set one, it should change by the amount it moves 
@@ -171,11 +172,11 @@ class KinematicsNode(Node):
         # Current postion, if not accepted, no changes:
         elif not response.accepted:
             response.status = f"Current set position: [x:{self.x}, y:{self.y}, theta:{self.theta}]" 
-            self.get_logger().info('Robot was not able to be reset. Request was NOT accepted')
+            self.get_logger().info('Robot was not able to be reset. R: Request was NOT accepted')
 
         else:
             response.status = f"Current set position: [x:{self.x}, y:{self.y}, theta:{self.theta}]" 
-            self.get_logger().info('Robot was not able to be reset. Error.')
+            self.get_logger().info('Robot was not able to be reset. R: Error')
 
         # Return the response part of the message when the function is run, with the assigned values
         return response
