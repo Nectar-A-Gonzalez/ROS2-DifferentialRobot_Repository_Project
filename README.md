@@ -110,3 +110,11 @@ dfdfdf<br>
 [Differential Drive Kinematics Notes by The University of Columbia](https://www.cs.columbia.edu/~allen/F17/NOTES/icckinematics.pdf "CS W4733 NOTES - Differential Drive Robots")<br>
 [Kinematics of Differential Drive Robots and Odometry Video by Engineering Educator Academy](https://www.youtube.com/watch?v=RZlZcDxQ8P4 "Kinematics of Differential Drive Robots and Odometry")<br>
 [5.2. Motion Model for the Differential Drive Robot from "Introduction to Robotics and Perception" from Georgia Tech](https://www.roboticsbook.org/S52_diffdrive_actions.html "5.2. Motion Model for the Differential Drive Robo")<br>
+
+
+inside the repository folder/ repository folder as current working directory
+git fetch https://Nectar-A-Gonzalez/
+git pull
+
+Vector variables are lists, so to get x, y, z, you need to use list indexing NOT atribute indexing or maybe you do? but x directly?
+TODO - VERIFY THERE IS NO OTHER WAY If you make it a list IT WONT WORK #Needs to be assigned INDIVIDUALLY
