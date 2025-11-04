@@ -115,8 +115,6 @@ class EncoderNode(Node):
             f"The robot's wheels have rotated:" 
             f"left wheel: {msg.left_ticks} ticks, right wheel:{msg.right_ticks} ticks.")
         
-#Test TODO - It might not accumulate the ticks, since it calculates just the degree changed per velocity not the degree changed since starting.
-#Verify which is the case
 # TODO - VERIFY IF TICK COUNT IS DONE CORRECTLY, BEING SUMMED
 
 
