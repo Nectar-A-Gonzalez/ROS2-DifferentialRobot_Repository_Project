@@ -35,7 +35,7 @@ from .robot_parameters import wheel_radius, wheel_axel_width, encoder_resolution
 class EncoderNode(Node): 
     def __init__(self):
         super().__init__("encoder_node") #name attribute
-        # SUBSCRIBER TO /cmd_vel TOPIC - (Gets Vx and Wz)
+        # SUBSCRIBER TO /cmd_vel TOPIC - (Gets Vx and Wz) - necessary for calculating wheel ticks
         self.subscription = self.create_subscription(Twist, 'cmd_vel', self.sub_cmdvel_callback, 25) #msg class type,topic name, callback, reserve amount)
         self.subscription # recommended to prevent unused variable warning
         # Subscribed to a ghost node that will send data at command line
@@ -53,7 +53,7 @@ class EncoderNode(Node):
         self.Twist_data_instance.linear.x = 0 
         self.Twist_data_instance.linear.y = 0
         self.Twist_data_instance.linear.z = 0
-        
+
         self.Twist_data_instance.angular.x = 0
         self.Twist_data_instance.angular.y = 0
         self.Twist_data_instance.angular.z = 0
@@ -64,7 +64,7 @@ class EncoderNode(Node):
         # Runs everytime it recieves a msg through /cmd_vel topic
         self.get_logger().info(f'The robot currently travels:{msg.linear.x} m/s and {msg.angular.z}rad/s')
         # Stored message into attribute so they are accesible for the publisher # Attribute created at method run
-        self.Twist_data_instance = msg
+        self.Twist_data_instance = msg #The initial values are overwritten 
 
     
     def pub_wheelticks_callback(self):
@@ -92,7 +92,7 @@ class EncoderNode(Node):
         degrees_left = w_left_deg*t
 
         # Calculate the ticks the encoder has/should count - CUMULATIVE AMOUNTS 
-        # Also pass values to msg attributes in one go
+        # Also pass values to msg attributes in one go - These have to be ints due to ROS2 msg management
         msg.right_ticks = (encoder_resolution/360)*degrees_right #Pulses per rotation/360 * degrees wheel rotated due to speed
         msg.left_ticks = (encoder_resolution/360)*degrees_left
 
@@ -106,6 +106,10 @@ class EncoderNode(Node):
             f"The robot's wheels have rotated:" 
             f"left wheel: {msg.left_ticks} ticks, right wheel:{msg.right_ticks} ticks.")
         
+#Test TODO - It might not accumulate the ticks, since it calculates just the degree changed per velocity not the degree changed since starting.
+#Verify which is the case
+
+
 
         
 def main(args=None):
@@ -121,3 +125,5 @@ def main(args=None):
 
 if __name__ == '__main__':
     main()
+
+# TODO - VERIFY IF TICK COUNT IS DONE CORRECTLY, BEING SUMMED
