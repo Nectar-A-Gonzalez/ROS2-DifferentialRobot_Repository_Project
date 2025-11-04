@@ -36,10 +36,10 @@ def main(args=None):
     reset_client.send_request() 
     while rclpy.ok():
         rclpy.spin.once(reset_client) #Use established name attribute
-        if reset_client.futute.done(): #Accesing the attributes with self aka the name
+        if reset_client.future.done(): #Accesing the attributes with self aka the name
             try:
                 response = reset_client.future.result() #future stores result after request to server
-            except Exception as e:
+            except Exception as e: #If the 
                 reset_client.get_logger().info(
                     'Service call failed %r' %(e,))
             else:

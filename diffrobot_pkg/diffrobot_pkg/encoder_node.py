@@ -57,7 +57,9 @@ class EncoderNode(Node):
         self.Twist_data_instance.angular.x = 0
         self.Twist_data_instance.angular.y = 0
         self.Twist_data_instance.angular.z = 0
-        #TODO - Verify there is no way to set this initial values with array variables just to check for efficiency's sake
+        #TODO - Verify there is no way to set this initial values with array variables just to check for efficiency's sake RESEARCH
+
+        
 
     
     def sub_cmdvel_callback(self,msg:Twist):
@@ -92,9 +94,11 @@ class EncoderNode(Node):
         degrees_left = w_left_deg*t
 
         # Calculate the ticks the encoder has/should count - CUMULATIVE AMOUNTS 
-        # Also pass values to msg attributes in one go - These have to be ints due to ROS2 msg management
-        msg.right_ticks = (encoder_resolution/360)*degrees_right #Pulses per rotation/360 * degrees wheel rotated due to speed
-        msg.left_ticks = (encoder_resolution/360)*degrees_left
+        # Also pass values to msg attributes in one go - These have to be ints due to ROS2 msg management -TODO - Research More about that
+        msg.right_ticks = int((encoder_resolution/360)*degrees_right) #Pulses per rotation/360 * degrees wheel rotated due to speed
+        msg.left_ticks = int((encoder_resolution/360)*degrees_left)
+
+
 
         # Get time for when publishing the ticks messages
         msg.stamp = self.get_clock().now().to_msg() 
@@ -108,9 +112,7 @@ class EncoderNode(Node):
         
 #Test TODO - It might not accumulate the ticks, since it calculates just the degree changed per velocity not the degree changed since starting.
 #Verify which is the case
-
-
-
+# TODO - VERIFY IF TICK COUNT IS DONE CORRECTLY, BEING SUMMED
         
 def main(args=None):
     rclpy.init(args=args) #Initiate
@@ -126,4 +128,3 @@ def main(args=None):
 if __name__ == '__main__':
     main()
 
-# TODO - VERIFY IF TICK COUNT IS DONE CORRECTLY, BEING SUMMED
