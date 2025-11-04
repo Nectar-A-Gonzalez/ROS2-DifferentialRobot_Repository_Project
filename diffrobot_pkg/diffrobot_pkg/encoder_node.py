@@ -50,8 +50,14 @@ class EncoderNode(Node):
         # even if there has not been data published yet to the cmd_vel channel,
         # it will be able to run
         self.Twist_data_instance = Twist()
-        self.Twist_data_instance.linear = [0,0,0]
-        self.Twist_data_instance.angular = [0,0,0]
+        self.Twist_data_instance.linear.x = 0 
+        self.Twist_data_instance.linear.y = 0
+        self.Twist_data_instance.linear.z = 0
+        
+        self.Twist_data_instance.angular.x = 0
+        self.Twist_data_instance.angular.y = 0
+        self.Twist_data_instance.angular.z = 0
+        #TODO - Verify there is no way to set this initial values with array variables just to check for efficiency's sake
 
     
     def sub_cmdvel_callback(self,msg:Twist):
