@@ -119,9 +119,9 @@ class KinematicsNode(Node):
             position_vector = t * velocity_vector #TODO VERIFY LOGIC FOR TIME AMOUNT
             
             # Update x,y,theta values stored in attributes
-            self.x = self.x + position_vector[0]
-            self.y = self.y + position_vector[1]
-            self.theta = self.theta + position_vector[2]
+            self.x = float(self.x + position_vector[0])
+            self.y = float(self.y + position_vector[1])
+            self.theta = float(self.theta + position_vector[2])
 
             # Write the data to the message 
             msg.x = self.x
@@ -137,7 +137,7 @@ class KinematicsNode(Node):
             msg.stamp = self.get_clock().now().to_msg() 
             # Publish and Logger
             self.publisher_.publish(msg)
-            self.get_logger().info('Publishing: x:%d, y:%d, theta:%d [NO CHANGE]' % (msg.x, msg.y, msg.theta)) 
+            self.get_logger().info(f'Publishing: x: (msg.x), y: [mgs.y] , theta:%d [NO CHANGE]' % (msg.x, msg.y, msg.theta)) 
 
         else:
             msg.stamp = self.get_clock().now().to_msg()
