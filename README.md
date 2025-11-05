@@ -58,9 +58,7 @@ From the root of your workspace, run:
 ## How to source and run the package
 To be able to access the executables that were just built in our current terminal, we need to source them:
 
-    dfdfd
     source install/setup.bash
-    dfdf
 
 ## Commands to test the pub/sub and service/client communications:
 sdsdsdsd<br>
@@ -81,50 +79,89 @@ dfdfdf<br>
     dfdf
 
 ## Required Verification
-1) Interfaces exist and are introspectable<br>
+### 0 Create a new workspace, build and source:<br>
 
-    ros2 interface show diffrobot_interfaces/msg/Wheelticks
-    ros2 interface show diffrobot_interfaces/msg/Pose2DStamped
-    ros2 interface show diffrobot_interfaces/srv/SetPose
+Create the new workspace:<br>
+```
+mkdir -p ~/YOUR-WORKSPACE/src && cd ~/YOUR-WORKSPACE/src
+```
 
-2) Launch stack (encoder + kinematics)
+Clone the Repository INSIDE the src folder:<br>
+```
+git clone https://github.com/Nectar-A-Gonzalez/ROS2-DifferentialRobot_Repository_Project.git
+```
 
-    ros2 launch diffrobot_pkg diffrobot_launch.py
+Move back to the root of the workspace to verify dependencies and build:<br>
+```
+cd ../
+```
+```
+rosdep install -i --from-path src --rosdistro jazzy -y
+```
+```
+colcon build
+```
 
-3) Topics appear and produce data
+Source the code in the current terminal (necessary for each new terminal):<br>
+```
+source install/setup.bash
+```
 
-    ros2 topic list | grep -E '^/wheel_ticks$|^/pose$'
-    ros2 topic echo /wheel_ticks --once
-    ros2 topic echo /pose --once
+### 1 Interfaces exist and are introspectable:<br>
+```
+ros2 interface show diffrobot_interfaces/msg/WheelTicks
+ros2 interface show diffrobot_interfaces/msg/Pose2DStamped
+ros2 interface show diffrobot_interfaces/srv/SetPose
+```
 
-4) (Since it does not have an auto-publishing cmd-vel) Publish a test velocity for at least 3 seconds
-    #In another terminal (after sourcing):
+### 2 Launch stack (encoder + kinematics):
+```
+ros2 launch diffrobot_pkg diffrobot_launch.py
+```
 
-    ros2 topic pub /cmd_vel geometry_msgs/Twist "{linear: {x: 0.2, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}" -r 10
+### 3 Topics appear and produce data:
+```
+ros2 topic list | grep -E '^/wheel_ticks$|^/pose$'
+ros2 topic echo /wheel_ticks --once
+ros2 topic echo /pose --once
+```
 
-5) Verify pose changes over time (run twice a few seconds apart)
 
-    ros2 topic echo /pose --once
-    sleep 2
-    ros2 topic echo /pose --once
+### 4 Publish a test velocity for at least 3 seconds:<br>
+Since this package does not have an auto-publishing node for the cmd-vel topic, it is necessary to manually publish velocities to the topic.<br>
+In another terminal after sourcing, run:
+```
+ros2 topic pub /cmd_vel geometry_msgs/Twist "{linear: {x: 0.2, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}" -r 10
+```
 
-6) Service exists with correct type
+### 5 Verify pose changes over time (run twice a few seconds apart)
+```
+ros2 topic echo /pose --once
+sleep 2
+ros2 topic echo /pose --once
+```
 
-    ros2 service type /reset_pose
-    # Expected output: diffrobot_pkg/srv/SetPose
+### 6 Service exists with correct type
+```
+ros2 service type /reset_pose
+# Expected output: diffrobot_pkg/srv/SetPose
+```
 
-7) Call service directly via CLI
+### 7 Call service directly via CLI
+```
+ros2 service call /reset_pose diffrobot_pkg/srv/SetPose "{x: 1.0, y: 0.0, theta: 1.57}"
+```
 
-    ros2 service call /reset_pose diffrobot_pkg/srv/SetPose "{x: 1.0, y: 0.0, theta: 1.57}"
+### 8 Call service using your client node
+```
+ros2 run diffrobot_pkg reset_client -- --x 0.0 --y 0.0 --theta 0.0 #THIS SEEMS WEIRD BTW
+```
 
-8) Call service using your client node
-
-    ros2 run diffrobot_pkg reset_client -- --x 0.0 --y 0.0 --theta 0.0 #THIS SEEMS WEIRD BTW
 
 ## Example Outputs Video - Using the test commands
 
 
-### Some References<br>
+### Some References:<br>
 [Differential Drive Kinematics Notes by The University of Columbia](https://www.cs.columbia.edu/~allen/F17/NOTES/icckinematics.pdf "CS W4733 NOTES - Differential Drive Robots")<br>
 [Kinematics of Differential Drive Robots and Odometry Video by Engineering Educator Academy](https://www.youtube.com/watch?v=RZlZcDxQ8P4 "Kinematics of Differential Drive Robots and Odometry")<br>
 [5.2. Motion Model for the Differential Drive Robot from "Introduction to Robotics and Perception" from Georgia Tech](https://www.roboticsbook.org/S52_diffdrive_actions.html "5.2. Motion Model for the Differential Drive Robo")<br>
