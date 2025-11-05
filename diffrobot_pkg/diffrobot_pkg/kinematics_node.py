@@ -137,7 +137,7 @@ class KinematicsNode(Node):
             msg.stamp = self.get_clock().now().to_msg() 
             # Publish and Logger
             self.publisher_.publish(msg)
-            self.get_logger().info(f'Publishing: x: (msg.x), y: [mgs.y] , theta:%d [NO CHANGE]' % (msg.x, msg.y, msg.theta)) 
+            self.get_logger().info(f'Publishing: x:{msg.x}, y:{msg.y}, theta:{msg.theta} [NO CHANGE]') 
 
         else:
             msg.stamp = self.get_clock().now().to_msg()
