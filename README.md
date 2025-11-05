@@ -32,11 +32,11 @@ While inside the `src` folder, clone this repository to the folder:
 
     git clone https://github.com/Nectar-A-Gonzalez/ROS2-DifferentialRobot_Repository_Project
 
-Here the diffrobot_pkg hold the dfdfdffdf code, while diffrobot_interfaces holds the necessary msg and srv templates for ROS2 communication.
+Here the diffrobot_pkg holds the actual code, while diffrobot_interfaces holds the necessary msg and srv templates for ROS2 communication.
 
 ### Resolve Dependencies
 Before we can _build_ the workspace, we need to check if all the required package dependencies are installed.<br>
-Go to the root of your workspace
+Go to the root of your workspace:
     
     cd ~/YOUR-WORKSPACE/
 
@@ -55,28 +55,57 @@ From the root of your workspace, run:
     # Finished <<< #### [###]
     # Summary: 2 package finished [###]
 
-## How to source and run the package
-To be able to access the executables that were just built in our current terminal, we need to source them:
+### How to source and run the package
+To be able to access the executables that we just built in our current terminal, we need to source them:
 
     source install/setup.bash
+Note: You need to be inside the workspace, in the root, to be able to source the packages.
 
-## Commands to test the pub/sub and service/client communications:
+## Commands to test the pub/sub and service/client communications: lllllllllllll
 sdsdsdsd<br>
 
 Verify 
 
+## Run the Code Commands to test the pub/sub and service/client communications: dfdfdfdfff malmlml
+To efficiently start the necesary??? nodes, run the launch file. This will run the kinematics_node and the encoder_node.
+In a sourced terminal, run the following:<br>
 
+    dfdfdfffd
 
-To simulate a commanding velocity input, dfdf<br>
+At this moment, a lot of text will appear in the terminal, it just states the current values for dfdfdf for the dfdf node and the values of dfdfd for the dfdf node. The values should say zero, since nothing is being read, nor any velocity is being simulated for the robot.
+
+The kinematics node
+Requires         Outputs
+(Subscribes)    (Publishes)
+
+Description of topics:
+/cmd_vel - topic that dfdfd
+/ 
+
+To simulate a command (??) velocity input, in a new, sourced terminal, run:<br> 
 
     ros2 pub dfdfdf at -rate 10
     dfd
     klklkl
+This will publish a linear velocity of dfdfd m/s ???, in the direction of x, to the /cmd_vel topic. It will publish continuosly at a rate of dfdf times per dfdf.
 
+To see the change in positoin dfdfdfd
 dfdfdf<br>
 
     df
     dfdf
+
+To reset the position of the robot to a desired position,  the change dfdfdfd
+dfdfdf<br>
+
+    df
+    dfdf
+
+
+If you want to run individual nodes instead, run:
+    
+    ros2 run diffrobot_pkg kinematic_node 
+
 
 ## Required Verification
 ### 0 Create a new workspace, build and source:<br>
@@ -91,7 +120,7 @@ Clone the Repository INSIDE the src folder:<br>
 git clone https://github.com/Nectar-A-Gonzalez/ROS2-DifferentialRobot_Repository_Project.git
 ```
 
-Move back to the root of the workspace to verify dependencies and build:<br>
+Move back to the root of the workspace to verify dependencies and then build the packages:<br>
 ```
 cd ../
 ```
@@ -101,6 +130,9 @@ rosdep install -i --from-path src --rosdistro jazzy -y
 ```
 colcon build
 ```
+>[!Note] 
+>Always build in the Root of your workspace, not inside a subfolder.
+
 
 Source the code in the current terminal (necessary for each new terminal):<br>
 ```
