@@ -4,7 +4,7 @@
 wheel_radius = 0.0889 #(meters) 
 wheel_axel_width = 0.2032 #(meters)
 encoder_resolution = 500 #Pulses per Rotation PPR
-t = 1 #(seconds) #time the velocity is applied for #Should probably be changed to the time between velocity publications
+t = 0.05 #(seconds) #time the velocity is applied for #Should probably be changed to the time between velocity publications
 # Here wheel radius is set as the same for both wheels, though it could be different
 
 #Future improvements - these as parameters for
