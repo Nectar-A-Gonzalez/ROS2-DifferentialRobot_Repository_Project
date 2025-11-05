@@ -176,12 +176,12 @@ ros2 topic echo /pose --once
 ### 6 Service exists with correct type
 ```
 ros2 service type /reset_pose
-# Expected output: diffrobot_pkg/srv/SetPose
+# Expected output: diffrobot_interfaces/srv/SetPose 
 ```
 
 ### 7 Call service directly via CLI
 ```
-ros2 service call /reset_pose diffrobot_pkg/srv/SetPose "{x: 1.0, y: 0.0, theta: 1.57}"
+ros2 service call /reset_pose diffrobot_interfaces/srv/SetPose "{x: 1.0, y: 0.0, theta: 1.57}"
 ```
 
 ### 8 Call service using your client node
