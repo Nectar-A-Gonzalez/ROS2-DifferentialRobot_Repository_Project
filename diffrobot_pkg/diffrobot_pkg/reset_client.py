@@ -10,7 +10,7 @@ from diffrobot_interfaces.srv import SetPose
 class ResetClient(Node):
     
     def __init__(self):
-        super.__init__("reset_client")
+        super().__init__("reset_client")
         self.cli = self.create_client(SetPose, 'reset_pose') # srv type, srv comm channel name, have to match
 
         #Time it will wait for, and if this function doesn't come back true aka the service is not active/available, it will keep in this loop.. waiting
