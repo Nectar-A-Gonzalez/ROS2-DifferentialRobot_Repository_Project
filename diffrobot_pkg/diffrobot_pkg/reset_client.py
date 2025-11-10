@@ -5,7 +5,7 @@
 import sys #To use command line values
 import rclpy
 from rclpy.node import Node
-from diffrobot_interfaces import SetPose
+from diffrobot_interfaces.srv import SetPose
 
 class ResetClient(Node):
     
