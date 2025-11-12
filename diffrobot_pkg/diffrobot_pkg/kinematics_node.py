@@ -163,7 +163,7 @@ class KinematicsNode(Node):
             self.y = request.y
             self.theta = request.theta
             response.status = f"Current set position: [x:{self.x}, y:{self.y}, theta:{self.theta}]" #TODO-IS THIS EVEN SEEN OR JUST REPLACED AND NOT EVEN SEEN??
-            self.get_logger().info('Incoming request: [x:%d, y:%d, theta:%d]' % (request.x, request.y, request.theta)) 
+            self.get_logger().info(f'Incoming request: [x:{request.x}, y:{request.y}, theta:{request.theta}]')
             #TODO - ASK - Can the other method be used? Fstring? RESEARCH NOTE
             #NOTE - it might not be necessary to reset encoder, since it only takes change between encoder betwen messages to calcualte new position
             # and if the initial position is now the set one, it should change by the amount it moves 
