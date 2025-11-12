@@ -61,7 +61,7 @@ To be able to access the executables that we just built in our current terminal,
     source install/setup.bash
 Note: You need to be inside the workspace, in the root, to be able to source the packages.
 
-## Commands to test the pub/sub and service/client communications: lllllllllllll
+## Commands to test the pub/sub and service/client communications:
 sdsdsdsd<br>
 
 Verify 
@@ -131,7 +131,7 @@ rosdep install -i --from-path src --rosdistro jazzy -y
 colcon build
 ```
 >[!Note] 
->Always build in the Root of your workspace, not inside a subfolder.
+>Always build in the ROOT of your workspace, not inside a subfolder.
 
 
 Source the code in the current terminal (necessary for each new terminal):<br>
@@ -187,6 +187,7 @@ ros2 service call /reset_pose diffrobot_interfaces/srv/SetPose "{x: 1.0, y: 0.0,
 ### 8 Call service using your client node
 ```
 ros2 run diffrobot_pkg reset_client -- --x 0.0 --y 0.0 --theta 0.0 #THIS SEEMS WEIRD BTW
+ros2 run diffrobot_pkg reset_client -- 0.0 0.0 0.0
 ```
 
 
