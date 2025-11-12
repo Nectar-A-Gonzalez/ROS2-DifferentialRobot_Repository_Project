@@ -23,9 +23,9 @@ class ResetClient(Node):
     def send_request(self):
         # Store the command line values in the request attributes correspondent
         #Convert it to an integer, from command line input
-        self.request.x = int(sys.argv[1]) 
-        self.request.y = int(sys.argv[2])
-        self.request.theta = int(sys.argv[3])
+        self.request.x = float(sys.argv[1]) 
+        self.request.y = float(sys.argv[2])
+        self.request.theta = float(sys.argv[3])
 
         # Sends the request to server and stores 
         self.future = self.cli.call_async(self.request) #Stores status of if process done or not; also stores result as attribute here
