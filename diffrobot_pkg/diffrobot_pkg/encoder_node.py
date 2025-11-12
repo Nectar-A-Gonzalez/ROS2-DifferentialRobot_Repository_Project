@@ -71,6 +71,9 @@ class EncoderNode(Node):
         # Stored message into attribute so they are accesible for the publisher # Attribute created at method run
         self.Twist_data_instance = msg #The initial values are overwritten 
 
+        # THIS MIGHT BE THE ISSUE, IT STORES IN A NORMAL VARIABLE NOT THE ROS2 MSG OBJECT? #TODO FIX
+    
+
     
     def pub_wheelticks_callback(self):
         msg = WheelTicks()
