@@ -44,9 +44,7 @@ def main(args=None):
                     'Service call failed %r' %(e,))
             else:
                 reset_client.get_logger().info(
-                    'Result of reset_client: Requested position [x:%d, y:%d, theta:%d]; Request has been accepted?: %d; Status of the Robot: %d' %
-                    (reset_client.request.x, reset_client.request.y, reset_client.request.theta, response.accepted, response.status)
-
+                    f'Result of reset_client: Requested position [x:{reset_client.request.x}, y:{reset_client.request.y}, theta:{reset_client.request.theta}]; Request has been accepted?: {response.accepted}; Status of the Robot: {response.status}'
                     #Use values of srv not actual for x,y,theta for node
                     # Need to give value to status in the server and the accepted also, 
                     # Just put the pure response variables as info for the logger
