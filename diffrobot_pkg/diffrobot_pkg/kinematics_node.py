@@ -131,7 +131,7 @@ class KinematicsNode(Node):
     
             # Publish and Logger
             self.publisher_.publish(msg)
-            self.get_logger().info('Publishing: x:%d, y:%d, theta:%d' % (msg.x, msg.y, msg.theta))
+            self.get_logger().info(f'Publishing: x:{msg.x}, y:{msg.y}, theta:{msg.theta}')
 
         elif right_ticks == self.right_ticks_past and left_ticks == self.left_ticks_past:
             msg.stamp = self.get_clock().now().to_msg() 
