@@ -35,7 +35,7 @@ def main(args=None):
     reset_client = ResetClient()
     reset_client.send_request() 
     while rclpy.ok():
-        rclpy.spin.once(reset_client) #Use established name attribute
+        rclpy.spin_once(reset_client) #Use established name attribute
         if reset_client.future.done(): #Accesing the attributes with self aka the name
             try:
                 response = reset_client.future.result() #future stores result after request to server
