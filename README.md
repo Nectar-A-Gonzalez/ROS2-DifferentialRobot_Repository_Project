@@ -2,18 +2,15 @@
 These packages are used to model a differential drive robot that communicates via ROS2 - Jazzy Distro.
 The diffrobot_pkg includes the three nodes that are used to simulate the differential robots behavior.
 The behavior is as follows:<br>
-- The robot is given a velocity at which it should move, the encoders are simulated through a node, which takes that linear and angular velocity (Vx and wz) and translates it into the amount of ticks the encoder would read, if the velocity is applied for 1 (one) second and the encoder has a resolution of dfddfdfdf (variables defined in the robot_parameters.py, change for your use case).<br>
+- The robot is given a velocity at which it should move, the encoders are simulated through a node, which takes that linear and angular velocity (Vx and wz) and translates it into the amount of ticks the encoder would read, if the velocity is applied for 1 (one) second and the encoder has a resolution of [dfddfdfdf] (variables defined in the robot_parameters.py, change for your use case).[VERIFY!THIS!]<br>
 - Based on the amount of ticks read by the encoders and if they changed from the previous instance, the new position of the robot is calculated.<br>
 dfdfd
-- The encoders "read" the angular velocity of each wheel in terms of tics read per degree dfdfererer
+- The encoders "read" the angular velocity of each wheel in terms of tics read per degree [dfdfererer]
  
 > [!Note] 
 > The instructions given here are for a Linux OS.<br>
 > Package is for ROS2 - Jazzy <br>
 > They assume ROS2 already installed and sourced in the terminals.<br>
-
-#Communicates to what Explain the ros way of communicating or just the data processing aspect, I think only the logical part #IDEA
-#And maybe give instrutions to how to see ros communication nodes relationships. #IDEA
 
 ## How to build the package in your own workspace:
 To build the package in a workspace, you first need to create your workspace folder (if you don't already have one).<br>
@@ -59,52 +56,70 @@ From the root of your workspace, run:
 To be able to access the executables that we just built in our current terminal, we need to source them:
 
     source install/setup.bash
-Note: You need to be inside the workspace, in the root, to be able to source the packages.
+>[!Note: You need to be inside the workspace, in the `root`, to be able to source the packages.
 
-## Commands to test the pub/sub and service/client communications:
-sdsdsdsd<br>
-
-Verify 
-
-## Run the Code Commands to test the pub/sub and service/client communications: dfdfdfdfff malmlml
-To efficiently start the necesary??? nodes, run the launch file. This will run the kinematics_node and the encoder_node.
+## Run the Code Commands to test the pub/sub and service/client communications: [dfdfdfdfff] malmlml
+To efficiently start the necesary nodes, run the launch file. This will run the kinematics_node and the encoder_node.
 In a sourced terminal, run the following:<br>
+```
+ros2 launch diffrobot_pkg diffrobot_launch.py
+```
+At this moment, a lot of text will appear in the terminal, it just states the current values for [dfdfdf] for the [dfdf] node and the values of [dfdfd] for the [dfdf] node. The values should say zero, since nothing is being read, nor any velocity is being simulated for the robot.
 
-    dfdfdfffd
-
-At this moment, a lot of text will appear in the terminal, it just states the current values for dfdfdf for the dfdf node and the values of dfdfd for the dfdf node. The values should say zero, since nothing is being read, nor any velocity is being simulated for the robot.
-
-The kinematics node
+Before moving on, lets[???] undestand the structure of the diffrobot_pkg's program/nodes:
+The Kinematics Node:
 Requires         Outputs
 (Subscribes)    (Publishes)
+---
+The Encoder Node:
+
+
+This basically generates encoder tick values, based on the velocity you are simulating the robot has.
+---
+The ResetClient Node:
+
+
 
 Description of topics:
-/cmd_vel - topic that dfdfd
-/ 
+/cmd_vel - topic that [????]
+/pose - topic that [????]
+/wheel_ticks - topic that [?????]
 
-To simulate a command (??) velocity input, in a new, sourced terminal, run:<br> 
+Description of services:
+/
+
+Now that we better undestand the structure of communication of the program, we can test the communication channel connections.
+To simulate a command [??] velocity input (the robots's simulated moving velocity [verify!]), in a new, sourced terminal, run:<br> 
 
     ros2 pub dfdfdf at -rate 10
     dfd
     klklkl
-This will publish a linear velocity of dfdfd m/s ???, in the direction of x, to the /cmd_vel topic. It will publish continuosly at a rate of dfdf times per dfdf.
+>[!NOTE: Everytime you want to run a command, relating to this package, in a new terminal, it is necessary to run the 'source command' in that terminal.]
 
-To see the change in positoin dfdfdfd
-dfdfdf<br>
+This will publish a linear velocity of [dfdfd] m/s [???], in the direction of x, to the /cmd_vel topic. It will publish continuosly at a rate of [dfdf] times per [dfdf].
 
-    df
-    dfdf
-
-To reset the position of the robot to a desired position,  the change dfdfdfd
-dfdfdf<br>
+To see the change in position [dfdfdfd]
+[dfdfdf]<br>
 
     df
     dfdf
 
+To reset the position of the robot to a desired position, run the following, with the desired positional values:<br>
 
-If you want to run individual nodes instead, run:
-    
+    df
+    dfdf
+
+If you want to run individual nodes instead of the launch file, in a new, sourced terminal, run [????]:
+
     ros2 run diffrobot_pkg kinematic_node 
+And in another run:
+
+    ros2 run diffrobot_pkg encoder_node 
+
+## Commands to test the pub/sub and service/client communications:
+To test the publisher and subscriber communication is working correctly, d<br>
+
+Verify 
 
 
 ## Required Verification
@@ -138,6 +153,8 @@ Source the code in the current terminal (necessary for each new terminal):<br>
 ```
 source install/setup.bash
 ```
+
+
 
 ### 1 Interfaces exist and are introspectable:<br>
 ```
