@@ -182,3 +182,5 @@ ros2 run diffrobot_pkg reset_client -- 0.0 0.0 0.0
 [Differential Drive Kinematics Notes by The University of Columbia](https://www.cs.columbia.edu/~allen/F17/NOTES/icckinematics.pdf "CS W4733 NOTES - Differential Drive Robots")<br>
 [Kinematics of Differential Drive Robots and Odometry Video by Engineering Educator Academy](https://www.youtube.com/watch?v=RZlZcDxQ8P4 "Kinematics of Differential Drive Robots and Odometry")<br>
 [5.2. Motion Model for the Differential Drive Robot from "Introduction to Robotics and Perception" from Georgia Tech](https://www.roboticsbook.org/S52_diffdrive_actions.html "5.2. Motion Model for the Differential Drive Robo")<br>
+
+[dfdfdffdfdf](C:\Users\necam\OneDrive\1 Projects\ROS2-DifferentialRobot_Repository_Project\Assets (For README)\recordingdiffrobot_pkg.mp4)
