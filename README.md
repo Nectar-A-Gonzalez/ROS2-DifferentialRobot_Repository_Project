@@ -10,6 +10,7 @@ Note: The robot's parameters are defined in the robot_parameters.py, change for 
 > [!Note] 
 > The instructions given here are for a Linux OS.<br>
 > Package is for ROS2 - Jazzy <br>
+> It has not been tested for other distros <br>
 > They assume ROS2 is already installed and sourced in the terminals.<br>
 
 ## How to build the package in your own workspace:
