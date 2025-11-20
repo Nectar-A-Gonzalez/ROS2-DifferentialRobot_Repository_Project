@@ -10,7 +10,8 @@ Note: The robot's parameters are defined in the robot_parameters.py, change for 
 > [!Note] 
 > The instructions given here are for a Linux OS.<br>
 > Package is for ROS2 - Jazzy <br>
-> They assume ROS2 already installed and sourced in the terminals.<br>
+> It has not been tested for other distros <br>
+> They assume ROS2 is already installed and sourced in the terminals.<br>
 
 ## How to build the package in your own workspace:
 To build the package in a workspace, you first need to create your workspace folder (if you don't already have one).<br>
@@ -186,8 +187,12 @@ ros2 run diffrobot_pkg reset_client -- 0.0 0.0 0.0
 [Kinematics of Differential Drive Robots and Odometry Video by Engineering Educator Academy](https://www.youtube.com/watch?v=RZlZcDxQ8P4 "Kinematics of Differential Drive Robots and Odometry")<br>
 [5.2. Motion Model for the Differential Drive Robot from "Introduction to Robotics and Perception" from Georgia Tech](https://www.roboticsbook.org/S52_diffdrive_actions.html "5.2. Motion Model for the Differential Drive Robo")<br>
 
+<<<<<<< HEAD
 [dfdfdffdfdf](C:\Users\necam\OneDrive\1 Projects\ROS2-DifferentialRobot_Repository_Project\Assets (For README)\recordingdiffrobot_pkg.mp4)
 
 Assets (For README)\recordingdiffrobot_pkg.mp4
 C:\Users\necam\OneDrive\1 Projects\ROS2-DifferentialRobot_Repository_Project\Assets (For README)\recordingdiffrobot_pkg.mp4
 (https://github.com/Nectar-A-Gonzalez/ROS2-DifferentialRobot_Repository_Project/Assets/recordingdiffrobot_pkg.mp4)
+=======
+
+>>>>>>> cb4e8465d31402872d1b092f3b150b353e2822e4
