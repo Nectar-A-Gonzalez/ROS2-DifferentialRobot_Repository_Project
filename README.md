@@ -56,7 +56,8 @@ From the root of your workspace, run:
 To be able to access the executables that we just built in our current terminal, we need to source them:
 
     source install/setup.bash
->[!Note: You need to be inside the workspace, in the `root`, to be able to source the packages.
+>[!Note]
+>You need to be inside the workspace, in the `root`, to be able to source the packages.
 
 ## Run the Code Commands to test the pub/sub and service/client communications:
 To efficiently start the necesary nodes, run the launch file. This will run the kinematics_node and the encoder_node.
@@ -66,17 +67,19 @@ ros2 launch diffrobot_pkg diffrobot_launch.py
 ```
 At this moment, a lot of text will appear in the terminal, it just states the robots current position (x,y,theta) for the Kinematics node and the current wheel ticks count per wheel for the Encoder node. The values should say zero, since nothing is being read, nor any velocity is being simulated for the robot.
 
-[In new, sourced terminal] To simulate a command velocity input (the robots's simulated moving velocity), run, with the desired values<br> 
+[In new, sourced terminal] To simulate a command velocity input (the robots's simulated moving velocity), run, with the desired values<br>
 
     ros2 topic pub /cmd_vel geometry_msgs/Twist "{linear: {x: 0.2, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}" -r 10
 (Due to the nature of the robot, movement in the z axis would not be accurate).
->[!NOTE: Everytime you want to run a command, relating to this package, in a new terminal, it is necessary to run the 'source command' in that terminal.]
-This will publish a linear velocity of [dfdfd] m/s [???], in the direction of x, to the /cmd_vel topic. It will publish continuosly at a rate of [dfdf] times per second.
+
+>[!NOTE]
+>Everytime you want to run a command, relating to this package, in a new terminal, it is necessary to run the 'source command' in that terminal.]
+
+This will publish a linear velocity of 0.2 m/s, in the direction of x, to the /cmd_vel topic. It will publish continuosly at a rate of 0.1 second times.
 
 [In new, sourced terminal] To see the change in position for the robot, run :<br>
 
     ros2 topic echo /pose
-
 [In new, sourced terminal] To reset the position of the robot to a desired position, run either of the following, with the desired positional values:<br>
 
     ros2 run diffrobot_pkg reset_client -- 0.0 0.0 0.0
@@ -184,3 +187,7 @@ ros2 run diffrobot_pkg reset_client -- 0.0 0.0 0.0
 [5.2. Motion Model for the Differential Drive Robot from "Introduction to Robotics and Perception" from Georgia Tech](https://www.roboticsbook.org/S52_diffdrive_actions.html "5.2. Motion Model for the Differential Drive Robo")<br>
 
 [dfdfdffdfdf](C:\Users\necam\OneDrive\1 Projects\ROS2-DifferentialRobot_Repository_Project\Assets (For README)\recordingdiffrobot_pkg.mp4)
+
+Assets (For README)\recordingdiffrobot_pkg.mp4
+C:\Users\necam\OneDrive\1 Projects\ROS2-DifferentialRobot_Repository_Project\Assets (For README)\recordingdiffrobot_pkg.mp4
+(https://github.com/Nectar-A-Gonzalez/ROS2-DifferentialRobot_Repository_Project/Assets/recordingdiffrobot_pkg.mp4)
