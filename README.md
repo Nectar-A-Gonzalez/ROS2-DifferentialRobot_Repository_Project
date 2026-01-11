@@ -95,6 +95,7 @@ And in another run:
 
     ros2 run diffrobot_pkg encoder_node 
 This would run the encoder node. 
+
 ---
 
 ## Required Verification
