@@ -190,6 +190,4 @@ ros2 run diffrobot_pkg reset_client -- 0.0 0.0 0.0
 Assets (For README)\recordingdiffrobot_pkg.mp4
 C:\Users\necam\OneDrive\1 Projects\ROS2-DifferentialRobot_Repository_Project\Assets (For README)\recordingdiffrobot_pkg.mp4
 (https://github.com/Nectar-A-Gonzalez/ROS2-DifferentialRobot_Repository_Project/Assets/recordingdiffrobot_pkg.mp4)
-=======
 
->>>>>>> cb4e8465d31402872d1b092f3b150b353e2822e4
